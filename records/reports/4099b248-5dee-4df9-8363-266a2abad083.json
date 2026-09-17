@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "4099b248-5dee-4df9-8363-266a2abad083",
+  "type": "report",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "088a5bd7-e0ee-4b72-8e7e-157a498cf7e4",
+    "change_id": "6efe925a-627e-4453-9688-86df4c4a1ad7",
+    "observation_date": "2026-09-16",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "x86_64",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "chromium",
+          "selector": {
+            "kind": "software",
+            "component": "package",
+            "name": "chromium"
+          },
+          "version": "151",
+          "version_scheme": "upstream"
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "kind": "software",
+            "component": "compositor",
+            "name": "hyprland"
+          }
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "chromium",
+          "hyprland"
+        ],
+        "edges": [
+          {
+            "from": "chromium",
+            "to": "hyprland",
+            "relation": "runs_on",
+            "transport": "software"
+          }
+        ]
+      }
+    },
+    "test_method": "The journal records two forward-cycle state checks for the multi-window experiment, followed by later observation of Chromium asynchronously exiting client fullscreen on an unfocused or hidden browser window. The custom bindings were then removed and stock behavior was restored.",
+    "baseline": "not-tested",
+    "expected_result": "Both Chromium clients remain in true presentation fullscreen while Hyprland cycles the visible internal fullscreen slot without causing a fresh exit-fullscreen notice.",
+    "result": "failure",
+    "actual_result": "Initial state checks appeared promising, but Chromium did not reliably keep every unfocused or hidden browser client fullscreen. The alternative compositor-only intervention suppressed the notice at the cost of visible tabs and toolbar. Neither intervention met the combined goal.",
+    "limitations": "This is one private journal import from one account and one system. The final visible notice was not independently retested during this contribution trial. No raw browser logs were retained or attached, and current software versions must not be treated as historical versions beyond the explicitly recorded Chromium major version.",
+    "provenance": "Imported from the user's private system-change journal; no raw diagnostics or private journal attachment are included.",
+    "adverse_effects": "The multi-window intervention changed ordinary fullscreen and window-cycling behavior and could not preserve client fullscreen reliably. The earlier intervention lost presentation mode by leaving browser chrome visible.",
+    "activation": {
+      "state": "not-active",
+      "details": "The journal records restoration of stock Hyprland bindings. A later read-only inspection found no custom Chromium fullscreen block in the active user bindings."
+    },
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "The journal reports that Chromium asynchronously exits client fullscreen on unfocused or hidden browser windows and treats the notice as part of exclusive-access security UI; the attempted state transfer therefore could not meet the combined goal."
+    },
+    "intervention_deviations": "The final assessment compared both historical interventions. This report links the later multi-window change; the compositor-only change remains a separate superseded record.",
+    "workaround_absent": true
+  }
+}

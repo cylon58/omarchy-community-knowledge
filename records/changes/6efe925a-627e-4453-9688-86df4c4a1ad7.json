@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "6efe925a-627e-4453-9688-86df4c4a1ad7",
+  "type": "change",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "088a5bd7-e0ee-4b72-8e7e-157a498cf7e4",
+    "intent": "optional",
+    "method": "workaround",
+    "explanation": "Historical failed and withdrawn experiment—not recommended. It attempted to place all Chromium clients on a matching workspace in client fullscreen while custom window-cycling bindings transferred only Hyprland's internal fullscreen slot.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "package",
+            "name": "chromium"
+          },
+          "presence": true
+        },
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "compositor",
+            "name": "hyprland"
+          },
+          "presence": true
+        }
+      ],
+      "uncertain_conditions": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "workspace"
+          },
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "For a workspace with at least two mapped windows, apply the custom behavior only when every mapped window carries the Chromium browser tag.",
+        "Override fullscreen so every Chromium client enters client fullscreen together.",
+        "Override forward and reverse window cycling so only Hyprland's internal fullscreen slot moves between the browser windows.",
+        "Preserve stock fullscreen and cycling behavior on every other workspace, then reload Hyprland and inspect configuration errors."
+      ]
+    },
+    "risk": "high",
+    "effects": "Historical failed and withdrawn experiment—not recommended. It changed fullscreen and window-cycling semantics on matching multi-window workspaces, and Chromium could asynchronously exit client fullscreen on an unfocused or hidden browser window.",
+    "rollback": "Remove the custom fullscreen and window-cycling overrides, restore the stock Hyprland bindings, and reload Hyprland.",
+    "validation_plan": "With two Chromium windows on one workspace, cycle in both directions and inspect internal and client fullscreen states on both windows. Then physically verify the notice, tabs, and toolbar after focus changes and after Chromium has processed asynchronous state changes.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Reload Hyprland after editing the user bindings and check configuration errors."
+    },
+    "affected_files": [
+      "{user_config}/hypr/bindings.lua"
+    ]
+  }
+}
