@@ -19,7 +19,7 @@
             "fetch-depth": 1,
             "path": "toolkit",
             "persist-credentials": false,
-            "ref": "a9080a5d94416512e93044865f318501009503e2",
+            "ref": "c6805f52b3836766433c97a3781b957eae7f574a",
             "repository": "cylon58/omarchy-community-knowledge-tools"
           }
         },
@@ -49,7 +49,7 @@
             "GITHUB_TOKEN": "${{ github.token }}"
           },
           "name": "Build canonical snapshot",
-          "run": "\"$RUNNER_TEMP/runtime/bin/python\" -I -m omarchy_knowledge.service build --deployment production --policy-revision a9080a5d94416512e93044865f318501009503e2 --toolkit-revision a9080a5d94416512e93044865f318501009503e2 --input \"$RUNNER_TEMP/status/status.json\" --output \"$RUNNER_TEMP/site\""
+          "run": "\"$RUNNER_TEMP/runtime/bin/python\" -I -m omarchy_knowledge.service build --deployment production --policy-revision c6805f52b3836766433c97a3781b957eae7f574a --toolkit-revision c6805f52b3836766433c97a3781b957eae7f574a --input \"$RUNNER_TEMP/status/status.json\" --output \"$RUNNER_TEMP/site\""
         },
         {
           "uses": "actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9",
@@ -100,7 +100,7 @@
             "fetch-depth": 1,
             "path": "toolkit",
             "persist-credentials": false,
-            "ref": "a9080a5d94416512e93044865f318501009503e2",
+            "ref": "c6805f52b3836766433c97a3781b957eae7f574a",
             "repository": "cylon58/omarchy-community-knowledge-tools"
           }
         },
@@ -119,7 +119,7 @@
             "GITHUB_TOKEN": "${{ github.token }}"
           },
           "name": "Plan canonical snapshot",
-          "run": "\"$RUNNER_TEMP/runtime/bin/python\" -I -m omarchy_knowledge.service plan --deployment production --policy-revision a9080a5d94416512e93044865f318501009503e2 --toolkit-revision a9080a5d94416512e93044865f318501009503e2 --output \"$RUNNER_TEMP/plan/plan.json\""
+          "run": "\"$RUNNER_TEMP/runtime/bin/python\" -I -m omarchy_knowledge.service plan --deployment production --policy-revision c6805f52b3836766433c97a3781b957eae7f574a --toolkit-revision c6805f52b3836766433c97a3781b957eae7f574a --output \"$RUNNER_TEMP/plan/plan.json\""
         },
         {
           "uses": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
@@ -149,7 +149,7 @@
             "fetch-depth": 1,
             "path": "toolkit",
             "persist-credentials": false,
-            "ref": "a9080a5d94416512e93044865f318501009503e2",
+            "ref": "c6805f52b3836766433c97a3781b957eae7f574a",
             "repository": "cylon58/omarchy-community-knowledge-tools"
           }
         },
@@ -175,7 +175,7 @@
             "GITHUB_TOKEN": "${{ github.token }}"
           },
           "name": "Publish canonical snapshot",
-          "run": "\"$RUNNER_TEMP/runtime/bin/python\" -I -m omarchy_knowledge.service publish --deployment production --policy-revision a9080a5d94416512e93044865f318501009503e2 --toolkit-revision a9080a5d94416512e93044865f318501009503e2 --input \"$RUNNER_TEMP/plan/plan.json\" --output \"$RUNNER_TEMP/status/status.json\""
+          "run": "\"$RUNNER_TEMP/runtime/bin/python\" -I -m omarchy_knowledge.service publish --deployment production --policy-revision c6805f52b3836766433c97a3781b957eae7f574a --toolkit-revision c6805f52b3836766433c97a3781b957eae7f574a --input \"$RUNNER_TEMP/plan/plan.json\" --output \"$RUNNER_TEMP/status/status.json\""
         },
         {
           "uses": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
