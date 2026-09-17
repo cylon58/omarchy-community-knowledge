@@ -1,0 +1,97 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "ec437a05-64f4-4879-be13-34b6f166d704",
+  "payload": {
+    "activation": {
+      "details": "Installation and explicit replacement of the built-in widget would be separate user-approved actions.",
+      "required": "manual"
+    },
+    "affected_files": [
+      "{user_config}/omarchy/plugins/io.github.dzanaga.multi-workspaces-indicator/"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          }
+        },
+        {
+          "kind": "topology",
+          "topology": {
+            "required_edges": [
+              {
+                "from": "display-a",
+                "relation": "connected_to",
+                "to": "host",
+                "transport": "unknown"
+              },
+              {
+                "from": "display-b",
+                "relation": "connected_to",
+                "to": "host",
+                "transport": "unknown"
+              }
+            ],
+            "selectors": [
+              {
+                "alias": "host",
+                "selector": {
+                  "kind": "hardware",
+                  "role": "host"
+                }
+              },
+              {
+                "alias": "display-a",
+                "selector": {
+                  "kind": "hardware",
+                  "role": "display"
+                }
+              },
+              {
+                "alias": "display-b",
+                "selector": {
+                  "kind": "hardware",
+                  "role": "display"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "case_id": "3873c6b4-8fc0-42ea-8724-64635758fb8b",
+    "effects": "If separately reviewed, installed, and enabled, this unsandboxed third-party widget replaces the built-in workspace bar widget and changes how focused and displayed workspaces are presented across monitors.",
+    "explanation": "Reference the exact MIT-licensed marketplace snapshot of dzanaga's Multi-monitor Workspaces Indicator. It declares itself a clone of omarchy.workspaces and is an optional alternative to a built-in widget, not an upstream fix.",
+    "intent": "optional",
+    "method": "plugin",
+    "procedure": {
+      "kind": "artifact-reference",
+      "reference": {
+        "artifact_kind": "plugin",
+        "identifier": "io.github.dzanaga.multi-workspaces-indicator",
+        "revision": "6ccb7d0464a9268991e05dc53ef9a6f5a871b3d3",
+        "source_description": "MIT-licensed snapshot by dzanaga; official marketplace listing snapshot",
+        "url": "https://github.com/dzanaga/omarchy-multi-workspaces-indicator/commit/6ccb7d0464a9268991e05dc53ef9a6f5a871b3d3",
+        "version": "1.0.0"
+      }
+    },
+    "requires_root": "no",
+    "risk": "medium",
+    "rollback": "Disable and remove the third-party plugin so the built-in omarchy.workspaces widget can be restored. Confirm the prior bar configuration after rollback.",
+    "validation_plan": "In a disposable multi-monitor Omarchy environment, review the exact pinned source, verify focus versus displayed-workspace states on each monitor, move workspaces between monitors, check single-monitor fallback, restart the shell, and confirm rollback to the built-in widget. No such test was performed for this record."
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/dzanaga/omarchy-multi-workspaces-indicator/commit/6ccb7d0464a9268991e05dc53ef9a6f5a871b3d3",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7268",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "change"
+}

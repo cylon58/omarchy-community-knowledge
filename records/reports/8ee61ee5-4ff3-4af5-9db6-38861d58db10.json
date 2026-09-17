@@ -1,0 +1,59 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "8ee61ee5-4ff3-4af5-9db6-38861d58db10",
+  "payload": {
+    "activation": {
+      "details": "No local installation or activation was performed for this research record.",
+      "state": "not-active"
+    },
+    "actual_result": "No local compatibility or behavioral result exists. The author states that single-monitor behavior matches the stock widget, but that claim was not independently tested here. The listed snapshot matched repository HEAD when checked.",
+    "adverse_effects": "Not assessed because the plugin was not run.",
+    "baseline": "not-tested",
+    "case_id": "3873c6b4-8fc0-42ea-8724-64635758fb8b",
+    "change_id": "ec437a05-64f4-4879-be13-34b6f166d704",
+    "environment": {
+      "architecture": "unknown",
+      "channel": "unknown",
+      "components": [
+        {
+          "alias": "plugin",
+          "selector": {
+            "component": "plugin",
+            "kind": "software",
+            "name": "io.github.dzanaga.multi-workspaces-indicator"
+          },
+          "version": "1.0.0",
+          "version_scheme": "semver"
+        }
+      ],
+      "origin": "external-source",
+      "runtime_mode": "unknown",
+      "topology": {
+        "edges": [],
+        "nodes": [
+          "plugin"
+        ]
+      }
+    },
+    "expected_result": "A future opt-in test would establish whether the pinned widget correctly distinguishes global focus from each monitor's displayed workspace.",
+    "limitations": "This is one attributed public source reference, not a firsthand report or independent reproduction. No minimum Omarchy version is declared; multi-monitor transitions, shell restart behavior, and rollback remain untested locally.",
+    "observation_date": "2026-09-17",
+    "provenance": "Public source authored by dzanaga and released under MIT; exact snapshot and marketplace submission are linked. Marketplace review is not represented as a security audit.",
+    "result": "not-tested",
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "This is an optional presentation alternative, not a diagnosed stock Omarchy defect."
+    },
+    "test_method": "Reviewed the public manifest, README, MIT license, exact marketplace listing record, and repository HEAD. The plugin was not installed, enabled, or executed."
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/dzanaga/omarchy-multi-workspaces-indicator/commit/6ccb7d0464a9268991e05dc53ef9a6f5a871b3d3",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7268",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "report"
+}

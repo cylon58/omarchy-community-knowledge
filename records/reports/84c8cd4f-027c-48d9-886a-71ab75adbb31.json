@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "84c8cd4f-027c-48d9-886a-71ab75adbb31",
+  "payload": {
+    "activation": {
+      "details": "No local installation, credential configuration, or activation was performed for this research record.",
+      "state": "not-active"
+    },
+    "actual_result": "No local compatibility, privacy, cost, or behavioral result exists. The listed snapshot passed the marketplace's automated exact-commit baseline, but repository HEAD was two commits newer and changed the QML and helper files when checked.",
+    "adverse_effects": "Not assessed because neither plugin nor service was used.",
+    "baseline": "not-tested",
+    "case_id": "92e7d314-b9b6-420f-9449-7911da3bbbe4",
+    "change_id": "a08bd700-0099-4814-95c1-4a591e11ff4a",
+    "environment": {
+      "architecture": "unknown",
+      "channel": "unknown",
+      "components": [
+        {
+          "alias": "plugin",
+          "selector": {
+            "component": "plugin",
+            "kind": "software",
+            "name": "io.github.duketopceo.pplx"
+          },
+          "version": "0.1.0",
+          "version_scheme": "semver"
+        }
+      ],
+      "origin": "external-source",
+      "runtime_mode": "unknown",
+      "topology": {
+        "edges": [],
+        "nodes": [
+          "plugin"
+        ]
+      }
+    },
+    "expected_result": "A future opt-in test would establish whether the exact pinned snapshot performs the documented search workflow without exposing credentials or causing unacceptable service cost or shell effects.",
+    "limitations": "This is one attributed public source reference, not a firsthand report or independent reproduction. Marketplace review is not a security audit and does not cover the newer mutable HEAD. CLI version compatibility, API behavior, credential handling, billing, and failure modes remain untested locally.",
+    "observation_date": "2026-09-17",
+    "provenance": "Public plugin source authored by Luke Kimball and released under MIT; its README attributes the external Perplexity CLI as Apache-2.0. Exact snapshot, marketplace submission, and later source comparison are linked.",
+    "result": "not-tested",
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "This is an optional external-service integration reference, not a diagnosed stock Omarchy defect."
+    },
+    "test_method": "Reviewed the public manifest, README, MIT license, exact marketplace listing record, current repository HEAD, and public comparison from the listed snapshot to HEAD. The plugin and external CLI were not installed or executed, and no credential was used."
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/duketopceo/omarchy-pplx/commit/6be877e7746d141d29d6028f3893571d7a486b7b",
+      "https://github.com/duketopceo/omarchy-pplx/compare/6be877e7746d141d29d6028f3893571d7a486b7b...1b548846815b60445185f732893b98d8274a615b",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7324",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "report"
+}
