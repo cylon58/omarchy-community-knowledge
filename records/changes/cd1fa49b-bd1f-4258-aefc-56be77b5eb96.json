@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "cd1fa49b-bd1f-4258-aefc-56be77b5eb96",
+  "type": "change",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "fb0046ab-6722-4f6c-bad0-ca6ee7e15d35",
+    "intent": "optional",
+    "method": "configuration",
+    "explanation": "Set the general Hyprland input natural-scroll option to false and the nested touchpad natural-scroll option to true in the user input configuration.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "compositor",
+            "name": "hyprland"
+          },
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "In the user Hyprland input configuration, set the general input natural-scroll value to false.",
+        "In the nested touchpad configuration, set natural-scroll to true.",
+        "Reload Hyprland, confirm there are no configuration errors, then physically verify one mouse-wheel scroll and one touchpad scroll."
+      ]
+    },
+    "risk": "low",
+    "effects": "Mouse-like devices use conventional scrolling while the touchpad uses natural scrolling. Device classification or future compositor syntax changes may affect applicability.",
+    "rollback": "Remove the two user overrides or restore the preferred values, then reload Hyprland and check configuration errors.",
+    "validation_plan": "Confirm the two effective settings, check compositor configuration errors, and physically scroll once with the intended mouse and touchpad in an application with visible content.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Reload Hyprland and inspect configuration errors after editing the user input configuration."
+    },
+    "affected_files": [
+      "{user_config}/hypr/input.lua"
+    ]
+  }
+}

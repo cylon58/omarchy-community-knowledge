@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "id": "fc108a47-b322-444b-967c-93d26a6fb136",
+  "type": "report",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "158e91c4-cd4e-43ef-b2f3-d1062205655f",
+    "observation_date": "2026-09-14",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "unknown",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "lid-policy",
+          "selector": {
+            "kind": "software",
+            "component": "other",
+            "name": "docked-lid-power-policy"
+          }
+        },
+        {
+          "alias": "logind",
+          "selector": {
+            "kind": "software",
+            "component": "other",
+            "name": "systemd-logind"
+          }
+        },
+        {
+          "alias": "dock",
+          "selector": {
+            "kind": "hardware",
+            "role": "dock"
+          }
+        },
+        {
+          "alias": "display",
+          "selector": {
+            "kind": "hardware",
+            "role": "display"
+          }
+        },
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "role": "host"
+          }
+        }
+      ],
+      "features": [
+        {
+          "feature": "ac-power",
+          "value": true
+        },
+        {
+          "feature": "display-connected",
+          "value": true
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "lid-policy",
+          "logind",
+          "dock",
+          "display",
+          "host"
+        ],
+        "edges": [
+          {
+            "from": "lid-policy",
+            "to": "logind",
+            "relation": "controls",
+            "transport": "software"
+          },
+          {
+            "from": "dock",
+            "to": "host",
+            "relation": "connected_to",
+            "transport": "thunderbolt",
+            "detail": "summarized"
+          },
+          {
+            "from": "display",
+            "to": "host",
+            "relation": "connected_to",
+            "transport": "unknown",
+            "detail": "summarized"
+          }
+        ]
+      }
+    },
+    "test_method": "The journal attributes the unexpected suspend to a transient false dock-absent state in the original policy, then records a hardened 15-second decision rule and a desk-state check showing external power, dock context, and an external display. A later read-only check found the policy service enabled and active, but this trial did not close the lid, suspend, wake, or reload any service.",
+    "baseline": "reproduced",
+    "expected_result": "A transient loss of one dock signal does not suspend a closed laptop that remains externally powered in the desk context.",
+    "result": "partial",
+    "actual_result": "The hardened policy was installed and its decision inputs reported the intended powered desk context. The available journal entry does not document a complete post-change physical close-lid regression cycle, so durable behavioral success remains unconfirmed.",
+    "limitations": "This is one private journal import from one account and one host. The helper contains a host-specific enrolled-dock identity that is deliberately omitted, and the helper itself is not distributed as a portable change. Current service state is not a substitute for a historical physical lid test.",
+    "provenance": "Imported from the user's private system-change journal; no unique dock identity, raw logs, or private helper contents are attached.",
+    "adverse_effects": "The original custom policy caused an unexpected suspend and contributed to loss of docked USB input. The hardened policy centralizes all lid decisions in a privileged custom service, which requires careful fail-safe review.",
+    "activation": {
+      "state": "active",
+      "details": "The journal records the hardened policy as installed. A later read-only check found the service enabled and active, without reloading or exercising it."
+    },
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "The journal identified the first policy's immediate suspend request on a transient logind dock-absent report and changed the decision rule to require stable state and multiple desk-context signals."
+    },
+    "workaround_absent": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "bb7408d1-4740-4e08-8029-6f8131d1a204",
+  "type": "case",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Docked USB input remains unavailable after unexpected suspend",
+    "intent": "corrective",
+    "domains": [
+      "dock",
+      "input",
+      "resume",
+      "usb"
+    ],
+    "expectation": {
+      "basis": "previously-working",
+      "text": "External input devices connected through the dock should enumerate and work after the host resumes from suspend."
+    },
+    "observed": "After an unexpected suspend, the dock USB controller entered a fatal state. Software reset and driver rebind attempts did not restore the external input devices."
+  }
+}
