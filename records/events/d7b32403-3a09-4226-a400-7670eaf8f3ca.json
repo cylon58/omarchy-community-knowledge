@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "d7b32403-3a09-4226-a400-7670eaf8f3ca",
+  "type": "event",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "event_kind": "withdrawal",
+    "targets": [
+      {
+        "id": "4099b248-5dee-4df9-8363-266a2abad083",
+        "type": "report"
+      },
+      {
+        "id": "6efe925a-627e-4453-9688-86df4c4a1ad7",
+        "type": "change"
+      }
+    ],
+    "reason": "The later journal observation found the presentation-preserving experiment unreliable, restored stock bindings, and explicitly said neither experimental behavior was recommended.",
+    "supporting_reports": [
+      "4099b248-5dee-4df9-8363-266a2abad083"
+    ],
+    "relation": {
+      "kind": "withdraws",
+      "from": {
+        "id": "4099b248-5dee-4df9-8363-266a2abad083",
+        "type": "report"
+      },
+      "to": {
+        "id": "6efe925a-627e-4453-9688-86df4c4a1ad7",
+        "type": "change"
+      }
+    }
+  }
+}
