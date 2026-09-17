@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "088a5bd7-e0ee-4b72-8e7e-157a498cf7e4",
+  "type": "case",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Suppress repeated Chromium fullscreen notices without losing presentation mode",
+    "intent": "optional",
+    "domains": [
+      "browser",
+      "fullscreen",
+      "keybindings"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "When cycling between fullscreen Chromium windows, avoid a new exit-fullscreen notice while retaining true presentation fullscreen with tabs and toolbar hidden."
+    },
+    "observed": "Chromium could display its built-in exit-fullscreen notice again when focus returned to a fullscreen browser window. The journal describes this as an optional presentation preference, not a documented Omarchy regression."
+  }
+}

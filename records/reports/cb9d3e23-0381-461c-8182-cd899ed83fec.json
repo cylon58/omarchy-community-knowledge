@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "id": "cb9d3e23-0381-461c-8182-cd899ed83fec",
+  "type": "report",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "be8d2e86-526f-4d92-a3dc-de7b623f3734",
+    "change_id": "876d6cb5-2467-4b7d-9f26-d185b834c689",
+    "observation_date": "2026-09-14",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "unknown",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "numpad-plugin",
+          "selector": {
+            "kind": "software",
+            "component": "plugin",
+            "name": "cylon58.numpad-shortcuts"
+          }
+        },
+        {
+          "alias": "shell",
+          "selector": {
+            "kind": "software",
+            "component": "shell",
+            "name": "omarchy-shell"
+          }
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "kind": "software",
+            "component": "compositor",
+            "name": "hyprland"
+          }
+        },
+        {
+          "alias": "external-keyboard",
+          "selector": {
+            "kind": "hardware",
+            "role": "keyboard"
+          }
+        },
+        {
+          "alias": "dock",
+          "selector": {
+            "kind": "hardware",
+            "role": "dock"
+          }
+        },
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "role": "host"
+          }
+        }
+      ],
+      "features": [
+        {
+          "feature": "num-lock",
+          "value": true
+        }
+      ],
+      "settings": [
+        {
+          "setting": "num-lock",
+          "value": true
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "numpad-plugin",
+          "shell",
+          "hyprland",
+          "external-keyboard",
+          "dock",
+          "host"
+        ],
+        "edges": [
+          {
+            "from": "numpad-plugin",
+            "to": "shell",
+            "relation": "runs_on",
+            "transport": "software"
+          },
+          {
+            "from": "shell",
+            "to": "hyprland",
+            "relation": "controls",
+            "transport": "software"
+          },
+          {
+            "from": "external-keyboard",
+            "to": "host",
+            "relation": "delivers_input_to",
+            "transport": "usb",
+            "via": [
+              "dock"
+            ],
+            "detail": "summarized"
+          },
+          {
+            "from": "dock",
+            "to": "host",
+            "relation": "connected_to",
+            "transport": "thunderbolt",
+            "detail": "summarized"
+          }
+        ]
+      }
+    },
+    "test_method": "The journal records installation and enablement, the intended 21 bindings, and compositor, kernel, and keyboard LED reports that Num Lock was enabled. It does not record a complete physical-key test matrix.",
+    "baseline": "not-tested",
+    "expected_result": "The requested workspace and terminal shortcuts work from the external keyboard through the dock with Num Lock on and off.",
+    "result": "partial",
+    "actual_result": "The plugin was installed and enabled, the intended binding set was present, and Num Lock was reported enabled by software and keyboard indicators. The journal does not establish that every physical shortcut was exercised on the docked external keyboard.",
+    "limitations": "This is one private journal import from one account and one system, not an independent firsthand confirmation. The journal supports the summarized external-keyboard-through-dock use-case topology but does not identify which keyboard supplied each tested key, whether any key was tested directly rather than through the dock, or the historical Omarchy, shell, and compositor versions.",
+    "provenance": "Imported from the user's private system-change journal; no raw device inventory, unique device identifiers, or private journal attachment are included.",
+    "adverse_effects": "No adverse effect was recorded for the initial mapping, but the plugin changes session Num Lock policy and adds unsandboxed dynamic bindings.",
+    "activation": {
+      "state": "active",
+      "details": "The journal records the plugin as installed and enabled. A later read-only local check found the plugin installed, enabled, and 21 keypad bindings present, but that current observation is not a historical physical-key retest."
+    },
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "This was an optional customization request rather than a diagnosed defect."
+    },
+    "workaround_absent": false
+  }
+}

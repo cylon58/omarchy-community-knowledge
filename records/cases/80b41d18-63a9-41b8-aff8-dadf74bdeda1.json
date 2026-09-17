@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "80b41d18-63a9-41b8-aff8-dadf74bdeda1",
+  "type": "case",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Dynamic numpad shortcuts disappear after Hyprland reload",
+    "intent": "corrective",
+    "domains": [
+      "keybindings",
+      "plugin",
+      "hyprland"
+    ],
+    "expectation": {
+      "basis": "previously-working",
+      "text": "Once the custom numpad plugin has registered its shortcuts, those plugin-provided shortcuts should remain available after a Hyprland configuration reload."
+    },
+    "observed": "A Hyprland reload cleared the plugin's dynamically registered bindings while the long-running shell service stayed loaded, so the Super plus keypad shortcuts stopped working. This is a corrective repair to an optional custom plugin, not evidence of a stock Omarchy defect."
+  }
+}

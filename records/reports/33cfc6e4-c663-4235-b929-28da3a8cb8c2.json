@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "id": "33cfc6e4-c663-4235-b929-28da3a8cb8c2",
+  "type": "report",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "80b41d18-63a9-41b8-aff8-dadf74bdeda1",
+    "change_id": "f4242279-6b61-469c-b325-e8c8b373c1ea",
+    "observation_date": "2026-09-16",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "x86_64",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "numpad-plugin",
+          "selector": {
+            "kind": "software",
+            "component": "plugin",
+            "name": "cylon58.numpad-shortcuts"
+          },
+          "version": "0.1.1",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "shell",
+          "selector": {
+            "kind": "software",
+            "component": "shell"
+          }
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "kind": "software",
+            "component": "compositor",
+            "name": "hyprland"
+          }
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "numpad-plugin",
+          "shell",
+          "hyprland"
+        ],
+        "edges": [
+          {
+            "from": "numpad-plugin",
+            "to": "shell",
+            "relation": "runs_on",
+            "transport": "software"
+          },
+          {
+            "from": "shell",
+            "to": "hyprland",
+            "relation": "controls",
+            "transport": "software"
+          }
+        ]
+      }
+    },
+    "test_method": "The journal records that the model tests and plugin validation passed, and that all 21 plugin bindings were present before and after a live Hyprland reload with no configuration errors.",
+    "baseline": "reproduced",
+    "expected_result": "All 21 plugin-provided keypad bindings return after a Hyprland configuration reload.",
+    "result": "success",
+    "actual_result": "All 21 bindings were reported before and after the live reload, and the compositor reported no configuration errors.",
+    "limitations": "This is one private journal import from one account and one system, not an independent firsthand confirmation. The historical Omarchy, shell, compositor, and hardware versions were not recorded. A later read-only check found plugin version 0.1.1 and 21 live keypad bindings but deliberately did not repeat a reload.",
+    "provenance": "Imported from the user's private system-change journal; no raw logs or private journal text are attached.",
+    "adverse_effects": "No adverse effect was recorded in the journal's reload test. The plugin remains unsandboxed custom code and continuously probes compositor state.",
+    "activation": {
+      "state": "active",
+      "details": "The journal records one shell restart to replace the cached service instance; a later read-only local check found the plugin installed, enabled, and its 21 keypad bindings present."
+    },
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "The journal ties the failure to dynamically registered bindings being cleared by a compositor reload while the shell service remained loaded, and the successful intervention specifically detects and restores the absent sentinel binding."
+    },
+    "workaround_absent": false
+  }
+}

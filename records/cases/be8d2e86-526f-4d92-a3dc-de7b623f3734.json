@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "be8d2e86-526f-4d92-a3dc-de7b623f3734",
+  "type": "case",
+  "created_at": "2026-09-17T12:50:30Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Use Super with keypad digits and keypad Enter",
+    "intent": "optional",
+    "domains": [
+      "keybindings",
+      "input",
+      "workspaces"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "The user wanted Super plus keypad digits to select workspaces and Super plus keypad Enter to open a terminal, with Num Lock either on or off."
+    },
+    "observed": "The desired keypad equivalence was a customization request. The journal does not say Omarchy documented or previously provided it, so this case remains optional rather than corrective."
+  }
+}
