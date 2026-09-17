@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "158e91c4-cd4e-43ef-b2f3-d1062205655f",
+  "type": "case",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Custom docked-lid policy falsely suspends after transient dock-state loss",
+    "intent": "corrective",
+    "domains": [
+      "dock",
+      "lid-policy",
+      "suspend"
+    ],
+    "expectation": {
+      "basis": "documented",
+      "text": "The installed custom lid policy was intended to keep a closed laptop awake when it was externally powered at the desk dock."
+    },
+    "observed": "The first custom policy asked systemd to suspend when logind briefly reported the dock absent, causing an unexpected suspend during the externally powered docked session. This is a corrective repair to a custom policy, not a claimed stock Omarchy defect."
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "id": "5ca10df3-f2d1-4e3d-9165-183d0b459dde",
+  "type": "report",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "bb7408d1-4740-4e08-8029-6f8131d1a204",
+    "change_id": "43ae009f-9dc9-43d5-aaac-8db476d0c067",
+    "observation_date": "2026-09-14",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "unknown",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "dock",
+          "selector": {
+            "kind": "hardware",
+            "role": "dock"
+          }
+        },
+        {
+          "alias": "keyboard",
+          "selector": {
+            "kind": "hardware",
+            "role": "keyboard"
+          }
+        },
+        {
+          "alias": "mouse",
+          "selector": {
+            "kind": "hardware",
+            "role": "mouse"
+          }
+        },
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "role": "host"
+          }
+        }
+      ],
+      "features": [
+        {
+          "feature": "suspend",
+          "value": true
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "dock",
+          "keyboard",
+          "mouse",
+          "host"
+        ],
+        "edges": [
+          {
+            "from": "dock",
+            "to": "host",
+            "relation": "connected_to",
+            "transport": "thunderbolt",
+            "detail": "summarized"
+          },
+          {
+            "from": "keyboard",
+            "to": "host",
+            "relation": "delivers_input_to",
+            "transport": "usb",
+            "via": [
+              "dock"
+            ],
+            "detail": "summarized"
+          },
+          {
+            "from": "mouse",
+            "to": "host",
+            "relation": "delivers_input_to",
+            "transport": "wireless",
+            "via": [
+              "dock"
+            ],
+            "detail": "summarized"
+          }
+        ]
+      }
+    },
+    "test_method": "After software PCI reset and driver-rebind attempts did not restore the docked input devices, the dock cable was disconnected from the host long enough to cold-start the dock and then reconnected.",
+    "baseline": "reproduced",
+    "expected_result": "The dock controller restarts and the external keyboard and mouse enumerate again.",
+    "result": "success",
+    "actual_result": "The dock cold-started and the external input devices re-enumerated after cable disconnection and reconnection.",
+    "limitations": "This is one private journal import from one account, one host, and one recovery attempt. It establishes a recovery for the observed occurrence, not prevention, recurrence rate, or applicability to other dock topologies. Unique hardware and bus identifiers are deliberately omitted.",
+    "provenance": "Imported from the user's private system-change journal; no raw kernel logs, bus addresses, or unique device identities are attached.",
+    "adverse_effects": "Dock-attached devices are unavailable during the cable power cycle. The journal records no additional adverse effect from the successful recovery.",
+    "activation": {
+      "state": "not-active",
+      "details": "This is a one-time physical recovery procedure and makes no persistent configuration change."
+    },
+    "root_cause": {
+      "assessment": "suspected",
+      "rationale": "The journal observed a fatal dock USB-controller state after the unexpected suspend and successful recovery after cold-starting the dock, but it did not establish why the controller entered that state."
+    },
+    "workaround_absent": false
+  }
+}

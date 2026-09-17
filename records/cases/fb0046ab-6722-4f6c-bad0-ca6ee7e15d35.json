@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "fb0046ab-6722-4f6c-bad0-ca6ee7e15d35",
+  "type": "case",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Use conventional mouse scrolling and natural touchpad scrolling",
+    "intent": "optional",
+    "domains": [
+      "input",
+      "mouse",
+      "touchpad"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Mouse wheels should use conventional scrolling while the built-in touchpad uses natural scrolling."
+    },
+    "observed": "The desired per-device scrolling directions are a personal input preference. The journal does not claim that the prior defaults were defective."
+  }
+}

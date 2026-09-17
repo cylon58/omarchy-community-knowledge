@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "id": "43ae009f-9dc9-43d5-aaac-8db476d0c067",
+  "type": "change",
+  "created_at": "2026-09-17T12:52:28Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "bb7408d1-4740-4e08-8029-6f8131d1a204",
+    "intent": "corrective",
+    "method": "workaround",
+    "explanation": "Cold-start the dock by disconnecting its Thunderbolt or USB-C cable from the host for 15 seconds, then reconnect it and wait for the external input devices to enumerate.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "topology",
+          "topology": {
+            "selectors": [
+              {
+                "alias": "dock",
+                "selector": {
+                  "kind": "hardware",
+                  "role": "dock"
+                }
+              },
+              {
+                "alias": "host",
+                "selector": {
+                  "kind": "hardware",
+                  "role": "host"
+                }
+              },
+              {
+                "alias": "input-device",
+                "selector": {
+                  "kind": "hardware",
+                  "role": "keyboard"
+                }
+              }
+            ],
+            "required_edges": [
+              {
+                "from": "dock",
+                "to": "host",
+                "relation": "connected_to",
+                "transport": "thunderbolt",
+                "detail": "summarized"
+              },
+              {
+                "from": "input-device",
+                "to": "host",
+                "relation": "delivers_input_to",
+                "transport": "usb",
+                "via": [
+                  "dock"
+                ],
+                "detail": "summarized"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Disconnect the dock's Thunderbolt or USB-C cable from the host.",
+        "Leave the cable disconnected for 15 seconds so the dock controller cold-starts.",
+        "Reconnect the cable and wait for the external input devices to enumerate before testing them."
+      ]
+    },
+    "risk": "low",
+    "effects": "The dock and devices behind it temporarily disconnect. Unsaved activity on dock-attached storage or other peripherals could be interrupted, so inspect the attached topology before using this recovery.",
+    "rollback": "No persistent configuration is changed. Reconnect the cable and allow the docked devices to enumerate.",
+    "validation_plan": "After reconnecting, verify that the intended external keyboard and mouse enumerate and produce input. If the failure recurs, record the suspend and dock context without collecting unique device identifiers or raw logs.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Physical cable disconnection and reconnection performs the recovery."
+    },
+    "affected_files": []
+  }
+}
