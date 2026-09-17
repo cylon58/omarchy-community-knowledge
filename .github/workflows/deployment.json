@@ -1,10 +1,10 @@
 {
   "deployment": "production",
-  "policy_revision": "c6805f52b3836766433c97a3781b957eae7f574a",
+  "policy_revision": "9720575ed4d73b19549ef118f442cf611e009526",
   "repository": "cylon58/omarchy-community-knowledge",
   "repository_id": 1373429914,
   "toolkit_repository": "cylon58/omarchy-community-knowledge-tools",
   "toolkit_repository_id": 1373429982,
-  "toolkit_revision": "c6805f52b3836766433c97a3781b957eae7f574a",
+  "toolkit_revision": "9720575ed4d73b19549ef118f442cf611e009526",
   "version": 1
 }
