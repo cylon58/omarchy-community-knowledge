@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "37e8c516-50e0-4f3a-8066-de0002abf94d",
+  "payload": {
+    "domains": [
+      "input",
+      "shell-plugin"
+    ],
+    "expectation": {
+      "basis": "unknown",
+      "text": "A user who wants interactive keyboard-layout switching can choose an optional bar widget that displays and selects XKB layouts and variants."
+    },
+    "intent": "optional",
+    "observed": "The public marketplace lists a third-party Input layout widget. This record is a source reference, not evidence that the plugin was installed, tested locally, or is required for stock Omarchy behavior.",
+    "title": "Optional interactive XKB layout selector in the Omarchy bar"
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/jwkicklighter/jwkicklighter.input-layout/commit/3a15736d2de483bb6afa69d15b36beb21b5df527",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7308",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "case"
+}

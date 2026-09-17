@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "3873c6b4-8fc0-42ea-8724-64635758fb8b",
+  "payload": {
+    "domains": [
+      "display",
+      "shell-plugin",
+      "workspace"
+    ],
+    "expectation": {
+      "basis": "unknown",
+      "text": "A multi-monitor user can optionally distinguish each monitor's displayed workspace from the globally focused workspace in the bar."
+    },
+    "intent": "optional",
+    "observed": "The public marketplace lists a third-party widget that replaces the built-in workspace indicator for this optional presentation. This record does not assert a stock defect or a local compatibility test.",
+    "title": "Optional per-monitor workspace state in the Omarchy bar"
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/dzanaga/omarchy-multi-workspaces-indicator/commit/6ccb7d0464a9268991e05dc53ef9a6f5a871b3d3",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7268",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "case"
+}
