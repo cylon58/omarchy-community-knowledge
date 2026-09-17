@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "166c7d2b-4a8f-4b0e-80cf-cf3a4a26f922",
+  "payload": {
+    "activation": {
+      "details": "Installation and explicit plugin enablement would be separate user-approved actions.",
+      "required": "manual"
+    },
+    "affected_files": [
+      "{user_config}/omarchy/plugins/jwkicklighter.input-layout/",
+      "{user_state}/omarchy/plugins/jwkicklighter.input-layout/config.json"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          }
+        },
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "compositor",
+            "kind": "software"
+          }
+        },
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "libxkbcommon"
+          }
+        }
+      ]
+    },
+    "case_id": "37e8c516-50e0-4f3a-8066-de0002abf94d",
+    "effects": "If separately reviewed, installed, and enabled, the third-party widget runs unsandboxed in the user's shell, can change the active XKB layout through Hyprland, and stores enabled-layout state under the user state directory.",
+    "explanation": "Reference the exact MIT-licensed marketplace snapshot of Jordan Kicklighter's Input layout bar widget. Its README says it uses hyprctl and xkbcli, changes layouts at runtime, and persists the enabled layout list. Marketplace review is exact-commit catalog evidence, not a security audit or local compatibility result.",
+    "intent": "optional",
+    "method": "plugin",
+    "procedure": {
+      "kind": "artifact-reference",
+      "reference": {
+        "artifact_kind": "plugin",
+        "identifier": "jwkicklighter.input-layout",
+        "revision": "3a15736d2de483bb6afa69d15b36beb21b5df527",
+        "source_description": "MIT-licensed snapshot by Jordan Kicklighter; official marketplace listing snapshot",
+        "url": "https://github.com/jwkicklighter/jwkicklighter.input-layout/commit/3a15736d2de483bb6afa69d15b36beb21b5df527",
+        "version": "1.0.0"
+      }
+    },
+    "requires_root": "no",
+    "risk": "medium",
+    "rollback": "Disable and remove the plugin, then delete its optional persisted state only after the user separately approves that cleanup. Restore the previous bar widget placement if needed.",
+    "validation_plan": "In a disposable Omarchy environment, first review the exact pinned source. Verify dependency detection, layout and variant display, forward and backward switching, persistence, bar placement, shell restart behavior, and rollback. No such test was performed for this record."
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/jwkicklighter/jwkicklighter.input-layout/commit/3a15736d2de483bb6afa69d15b36beb21b5df527",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7308",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "change"
+}

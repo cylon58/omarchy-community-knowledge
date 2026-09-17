@@ -1,0 +1,65 @@
+{
+  "created_at": "2026-09-17T12:50:00Z",
+  "id": "a08bd700-0099-4814-95c1-4a591e11ff4a",
+  "payload": {
+    "activation": {
+      "details": "Installing the external CLI, configuring a service credential, installing the plugin, and enabling it are separate user-approved actions.",
+      "required": "manual"
+    },
+    "affected_files": [
+      "{user_config}/omarchy/plugins/io.github.duketopceo.pplx/"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          }
+        },
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "other",
+            "kind": "software",
+            "name": "pplx"
+          }
+        }
+      ]
+    },
+    "case_id": "92e7d314-b9b6-420f-9449-7911da3bbbe4",
+    "effects": "If separately reviewed, installed, configured, and enabled, the unsandboxed third-party widget can send user queries through an external CLI to the Perplexity API and depends on handling a user-supplied API credential. API usage may incur cost.",
+    "explanation": "Reference the historical exact MIT-licensed marketplace snapshot of Luke Kimball's pplx bar widget. The snapshot wraps the external Apache-2.0 Perplexity CLI and requires a user-supplied API key. The current repository HEAD was two commits newer when checked, so the mutable install URL must not be described as covered by the listed snapshot review.",
+    "intent": "optional",
+    "method": "plugin",
+    "procedure": {
+      "kind": "artifact-reference",
+      "reference": {
+        "artifact_kind": "plugin",
+        "identifier": "io.github.duketopceo.pplx",
+        "revision": "6be877e7746d141d29d6028f3893571d7a486b7b",
+        "source_description": "MIT-licensed historical snapshot by Luke Kimball; exact marketplace listing snapshot",
+        "url": "https://github.com/duketopceo/omarchy-pplx/commit/6be877e7746d141d29d6028f3893571d7a486b7b",
+        "version": "0.1.0"
+      }
+    },
+    "requires_root": "no",
+    "risk": "high",
+    "rollback": "Disable and remove the plugin. Separately revoke or remove any service credential only if the user requests it; do not delete credential storage as an implicit plugin-removal step.",
+    "validation_plan": "In a disposable environment with a dedicated low-privilege test credential, review the exact pinned source and CLI provenance, verify setup and missing-key states, query and citation behavior, timeout and network failures, output escaping, cost disclosure, credential non-disclosure, and complete rollback. No such test was performed for this record."
+  },
+  "provenance": {
+    "kind": "external-source",
+    "sources": [
+      "https://github.com/duketopceo/omarchy-pplx/commit/6be877e7746d141d29d6028f3893571d7a486b7b",
+      "https://github.com/duketopceo/omarchy-pplx/compare/6be877e7746d141d29d6028f3893571d7a486b7b...1b548846815b60445185f732893b98d8274a615b",
+      "https://github.com/omacom/omarchy-plugin-marketplace/issues/7324",
+      "https://github.com/omacom/omarchy-plugin-marketplace/commit/f3522cd933747e5cc1e804c00fae53476d8ef105"
+    ]
+  },
+  "schema_version": 1,
+  "type": "change"
+}
