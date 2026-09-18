@@ -1,0 +1,2 @@
+Release safety check: this harmless non-record file must be rejected by automated intake.
+This pull request is not intended to merge and will be closed after the check.
