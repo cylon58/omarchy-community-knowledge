@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "dd6ac575-5545-44ee-81df-fa87d24365ab",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import", "sources": ["https://github.com/cylon58/omarchy-codex-crash-model-picker/commit/573b86d11cc77e68a33ba1b4cb130ee8be95eabd"]},
+  "payload": {
+    "case_id": "585e7b9d-6bf5-45ec-9769-f40690f327a6",
+    "change_id": "adf98c2b-ed23-4fa9-91ac-3c4db1e18fe6",
+    "observation_date": "2026-09-17",
+    "environment": {
+      "origin": "journal-import", "architecture": "x86_64", "channel": "unknown", "runtime_mode": "native",
+      "components": [{"alias": "plugin", "selector": {"kind": "software", "component": "plugin", "name": "io.github.cylon58.codex-crash-model-picker"}, "version": "1.0.1", "version_scheme": "semver"}, {"alias": "omarchy", "selector": {"kind": "software", "component": "omarchy"}}, {"alias": "service", "selector": {"kind": "software", "component": "other", "name": "omarchy-crash-watch"}}],
+      "topology": {"nodes": ["plugin", "omarchy", "service"], "edges": [{"from": "plugin", "to": "service", "relation": "controls", "transport": "software"}, {"from": "service", "to": "omarchy", "relation": "runs_on", "transport": "software"}]}
+    },
+    "test_method": "Plugin validation, QML lint, shell syntax checks, focused behavioral suites, eight security regression tests, live enable and disable selection, cleanup, reinstall, and clean public-URL installation were recorded.",
+    "baseline": "reproduced",
+    "expected_result": "The picker preserves explicit Codex model and reasoning selection and other-agent fallback while excluding crash-controlled metadata from the initial prompt.",
+    "result": "success",
+    "actual_result": "The updated plugin passed all recorded checks, the user service ran the version 1.0.1 adapter, lifecycle transitions restored the packaged watcher when disabled, and only a validated process identifier entered the initial prompt.",
+    "limitations": "This is one private journal import from one installation. Tests support the custom plugin behavior, not the security of Omarchy's packaged diagnosis path or every future agent CLI. Marketplace review status is separate from local success.",
+    "provenance": "Imported from the private journal and linked to the exact public revision; no crash metadata, process identifiers, service logs, or local agent configuration are included.",
+    "adverse_effects": "No adverse effect was recorded for version 1.0.1. The plugin manages a user-service drop-in and starts an interactive terminal workflow after explicit click selection.",
+    "activation": {"state": "active", "details": "The journal records the updated plugin and its user service as active."},
+    "root_cause": {"assessment": "supported", "rationale": "The earlier plugin assembled the initial prompt from coredump metadata; version 1.0.1 deliberately narrows initial input to a validated process identifier and treats later metadata as untrusted."},
+    "workaround_absent": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "74a6f709-dba6-457a-8042-70fa00fe8053",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import"},
+  "payload": {
+    "case_id": "530c9da6-1226-43b8-b4a6-203407ca037d",
+    "intent": "corrective",
+    "method": "configuration",
+    "explanation": "Use a receiver-triggered user-device rule and helper to enable wake on the Logitech Unifying receiver and its upstream dock hubs whenever the receiver appears, then separately restart the corrected custom lid-policy service.",
+    "applicability": {"requires": [{"kind": "topology", "topology": {"selectors": [{"alias": "host", "selector": {"kind": "hardware", "role": "host"}}, {"alias": "dock", "selector": {"kind": "hardware", "role": "dock", "vendor": "Lenovo", "model": "ThinkPad Thunderbolt 4 Dock"}}, {"alias": "receiver", "selector": {"kind": "hardware", "role": "receiver", "vendor": "Logitech", "product": "Unifying receiver"}}, {"alias": "mouse", "selector": {"kind": "hardware", "role": "mouse"}}], "required_edges": [{"from": "dock", "to": "host", "relation": "connected_to", "transport": "thunderbolt", "detail": "summarized"}, {"from": "receiver", "to": "host", "relation": "delivers_input_to", "transport": "usb", "via": ["dock"], "detail": "summarized"}, {"from": "mouse", "to": "host", "relation": "delivers_input_to", "transport": "wireless", "via": ["receiver", "dock"], "detail": "summarized"}]}}]},
+    "procedure": {"kind": "instructions", "steps": ["Create a reviewed helper that enables wake only for the intended receiver and each upstream dock hub discovered from the current device path.", "Trigger the helper when the receiver appears and run it once for the current attachment.", "Restart the already-corrected custom lid-policy service separately, then perform a suspend, mouse-wake, and post-resume observation before treating the combined behavior as confirmed."]},
+    "risk": "high",
+    "effects": "The selected USB path can wake the host. More devices in that upstream path may become wake sources, and the separate privileged lid-policy service continues to control post-resume behavior.",
+    "rollback": "Disable and remove the wake helper, service, and device rule, reload the device and service managers, and separately disable or adjust the custom lid policy if requested.",
+    "validation_plan": "Suspend with the receiver attached through the dock, wake by mouse input, confirm which devices have wake enabled, and observe long enough to detect an immediate second suspend. Repeat away from the dock if safe to confirm the rule is topology-specific.",
+    "requires_root": "yes",
+    "activation": {"required": "manual", "details": "Reload the device and service managers, trigger the rule for the attached receiver, and restart the corrected lid-policy service."},
+    "affected_files": ["{system_config}/udev/rules.d/80-dock-usb-wake.rules", "{system_config}/systemd/system/dock-usb-wake.service", "{system_libexec}/dock-usb-wake"]
+  }
+}

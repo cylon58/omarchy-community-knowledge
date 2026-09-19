@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "530c9da6-1226-43b8-b4a6-203407ca037d",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import"},
+  "payload": {
+    "title": "Mouse connected through a dock cannot wake the suspended host",
+    "intent": "corrective",
+    "domains": ["dock", "input", "suspend", "usb"],
+    "expectation": {"basis": "user-requested", "text": "Movement or a button press from a Logitech mouse using a Unifying receiver through the dock should wake the suspended host, and the corrected custom lid policy should not immediately request another suspend after resume."},
+    "observed": "The private journal records a receiver-triggered wake helper and a restart of the corrected custom lid-policy service, followed by the stated active behavior. It does not record a complete wake-cycle test protocol or isolate the two interventions."
+  }
+}

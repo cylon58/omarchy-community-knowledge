@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "ee1aed1b-1082-418f-a5f6-39d9e1ed52de",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import"},
+  "payload": {
+    "case_id": "530c9da6-1226-43b8-b4a6-203407ca037d",
+    "change_id": "74a6f709-dba6-457a-8042-70fa00fe8053",
+    "observation_date": "2026-09-15",
+    "environment": {
+      "origin": "journal-import", "architecture": "unknown", "channel": "unknown", "runtime_mode": "native",
+      "components": [{"alias": "host", "selector": {"kind": "hardware", "role": "host"}}, {"alias": "dock", "selector": {"kind": "hardware", "role": "dock", "vendor": "Lenovo", "model": "ThinkPad Thunderbolt 4 Dock"}}, {"alias": "receiver", "selector": {"kind": "hardware", "role": "receiver", "vendor": "Logitech", "product": "Unifying receiver"}}, {"alias": "mouse", "selector": {"kind": "hardware", "role": "mouse"}}, {"alias": "policy", "selector": {"kind": "software", "component": "other", "name": "docked-lid-power-policy"}}],
+      "features": [{"feature": "suspend", "value": true}],
+      "topology": {"nodes": ["host", "dock", "receiver", "mouse", "policy"], "edges": [{"from": "dock", "to": "host", "relation": "connected_to", "transport": "thunderbolt", "detail": "summarized"}, {"from": "receiver", "to": "host", "relation": "delivers_input_to", "transport": "usb", "via": ["dock"], "detail": "summarized"}, {"from": "mouse", "to": "host", "relation": "delivers_input_to", "transport": "wireless", "via": ["receiver", "dock"], "detail": "summarized"}, {"from": "policy", "to": "host", "relation": "controls", "transport": "software"}]}
+    },
+    "test_method": "The journal records installation of the receiver-triggered wake helper and restart of the corrected lid-policy service, then states that mouse input can wake the host and that a powered, docked, closed host no longer immediately requests another suspend. It does not describe a complete test sequence.",
+    "baseline": "not-tested",
+    "expected_result": "Mouse input wakes the suspended host through the dock and the custom lid policy does not immediately suspend it again.",
+    "result": "partial",
+    "actual_result": "The journal reports the intended wake and post-resume behavior as active after both interventions were applied.",
+    "limitations": "The evidence is one journal import with an underspecified method. Applying two interventions together prevents causal isolation. No unique receiver data, USB path, device inventory, raw service output, or host-specific policy is included.",
+    "provenance": "Imported from the private system-change journal and limited to generic hardware model and component topology.",
+    "adverse_effects": "Enabling wake on upstream hubs can allow additional dock-attached activity to wake the host. The custom lid policy is privileged and remains a separate source of risk.",
+    "activation": {"state": "active", "details": "The journal records the wake rule and corrected custom lid-policy service as enabled after installation."},
+    "root_cause": {"assessment": "suspected", "rationale": "The result is consistent with wake being disabled along the receiver's upstream USB path and the prior service instance using stale lid-policy behavior, but the bundled change and incomplete method do not prove either cause independently."},
+    "workaround_absent": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "68f49de4-4d81-4506-9ca3-adbe9c5096bc",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import",
+    "sources": [
+      "https://github.com/cylon58/omarchy-tailnet-presence/commit/e8ff8dcdbea2212b897ac3b26bd811dba759a846"
+    ]
+  },
+  "payload": {
+    "title": "Tailnet Presence copy actions fail after command-environment hardening",
+    "intent": "corrective",
+    "domains": ["clipboard", "network-service", "shell-plugin"],
+    "expectation": {
+      "basis": "previously-working",
+      "text": "A Tailnet Presence bar widget that displays online and offline machines should copy the selected machine label or address to the Wayland clipboard when its copy action is used."
+    },
+    "observed": "The optional Tailnet Presence widget displayed online and offline machines, but its copy actions stopped working after command-execution hardening removed the desktop-session environment required by the clipboard helper. This is a repair to a custom plugin, not a stock Omarchy defect."
+  }
+}

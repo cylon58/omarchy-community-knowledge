@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "168aac80-60e9-43c3-8ec2-246cf0fb6dad",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import"},
+  "payload": {
+    "case_id": "4e697a1d-ec1f-4778-b75a-908abbe7240c",
+    "intent": "corrective",
+    "method": "plugin",
+    "explanation": "Replace the exclusive surface and dynamic-binding lifecycle with a normal menu plugin, statically loaded compositor bindings, an armed universal release handler, restricted mapping-file permissions, atomic saves, and standard-input delivery to the typing helper.",
+    "applicability": {"requires": [{"kind": "component", "selector": {"kind": "software", "component": "compositor", "name": "hyprland"}, "presence": true}, {"kind": "component", "selector": {"kind": "software", "component": "package", "name": "wtype"}, "presence": true}]},
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Load a reviewed static Menu submap from the user's compositor binding configuration rather than adding and removing live binding handles.",
+        "Use a normal menu window for editing and a universal release handler that opens the editor only when no letter action has disarmed it.",
+        "Restrict the plaintext mapping file to its owner, save it atomically, validate the selected letter, and stream mapped text to the typing helper over standard input.",
+        "Reload the compositor, inspect configuration errors, summon and dismiss the editor, and complete physical Menu-key and mapped-text tests before calling the behavior fully verified."
+      ]
+    },
+    "risk": "high",
+    "effects": "A Menu-key tap can open an editor and Menu plus a letter can type stored plaintext. The plugin adds a compositor submap and reads sensitive-by-choice local text, so it is not suitable as a credential vault.",
+    "rollback": "Remove the marked static loader from the user bindings, reload the compositor, disable the plugin, and remove its optional mapping file only with separate approval.",
+    "validation_plan": "Run model, wrapper, editor, manifest, Lua syntax, runtime-stub, and plugin validation checks. Confirm a clean compositor reload and normal editor summon/dismiss, then physically test one tap, one mapped letter, Escape, and an unmatched key.",
+    "requires_root": "no",
+    "activation": {"required": "manual", "details": "Load the static binding file through the user compositor configuration and reload the compositor."},
+    "affected_files": ["{user_config}/hypr/bindings.lua", "{user_config}/omarchy/plugins/cylon58.paste-layer/", "{user_config}/omarchy/paste-layer.json", "{user_bin}/omarchy-paste-layer"]
+  }
+}

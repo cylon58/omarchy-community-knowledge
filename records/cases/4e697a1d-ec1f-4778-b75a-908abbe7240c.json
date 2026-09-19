@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "4e697a1d-ec1f-4778-b75a-908abbe7240c",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import"},
+  "payload": {
+    "title": "Custom Menu-key paste layer disrupts the desktop during early implementations",
+    "intent": "corrective",
+    "domains": ["clipboard", "keybindings", "shell-plugin"],
+    "expectation": {"basis": "user-requested", "text": "A Menu-key A-to-Z direct-text layer should open a normal editor on a tap and type a selected mapping without trapping focus, destabilizing the compositor, or exposing mapped text in process arguments."},
+    "observed": "The first custom editor used an exclusive full-screen layer surface and trapped keyboard focus. A later experiment that removed dynamic binding handles destabilized the compositor twice. A redesigned menu plugin with static bindings passed non-physical checks, but final one-tap and mapped-text physical tests remained pending."
+  }
+}
