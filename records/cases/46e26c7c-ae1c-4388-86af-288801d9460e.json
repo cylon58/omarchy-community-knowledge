@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "46e26c7c-ae1c-4388-86af-288801d9460e",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Prefer Ghostty for terminal launches using xdg-terminal-exec",
+    "intent": "optional",
+    "domains": [
+      "terminal",
+      "desktop-preference"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Select the installed Ghostty desktop entry before other terminal entries in the user terminal preference order."
+    },
+    "observed": "The journal records placing Ghostty first in the terminal preference list. This is a preference for applications that honor xdg-terminal-exec, not a change to every application's terminal configuration."
+  }
+}

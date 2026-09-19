@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "e6042e46-69ed-40f0-8838-5c1f4c4d1c5e",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "46e26c7c-ae1c-4388-86af-288801d9460e",
+    "change_id": "5173003e-40af-4843-a15b-2ce720bb9590",
+    "observation_date": "2026-09-12",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "x86_64",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "application",
+          "selector": {
+            "kind": "software",
+            "component": "terminal",
+            "name": "ghostty"
+          }
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "application"
+        ],
+        "edges": []
+      }
+    },
+    "test_method": "The journal records the preference list order. A current read-only inspection also found the Ghostty desktop entry first; a fresh launch was not performed for this import.",
+    "baseline": "not-tested",
+    "expected_result": "Select the installed Ghostty desktop entry before other terminal entries in the user terminal preference order.",
+    "result": "partial",
+    "actual_result": "The Ghostty desktop entry is first in the recorded terminal preference list.",
+    "limitations": "A saved preference does not prove that every application honors the same terminal-selection mechanism.",
+    "provenance": "Sanitized import of the system-change journal; no private paths, raw logs or personal identifiers are included.",
+    "adverse_effects": "No adverse effect was recorded for this preference; this is not proof that none can occur.",
+    "activation": {
+      "state": "active",
+      "details": "The journal records this as the chosen configuration, not as a correction to stock Omarchy."
+    },
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "No defect or causal diagnosis is claimed: this is a requested preference."
+    }
+  }
+}

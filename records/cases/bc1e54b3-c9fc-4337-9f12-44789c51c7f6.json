@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "bc1e54b3-c9fc-4337-9f12-44789c51c7f6",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Open the installed ChatGPT desktop application from its Omarchy shortcut",
+    "intent": "optional",
+    "domains": [
+      "keybindings",
+      "desktop-preference"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Keep the familiar Super+Shift+A shortcut while opening the already-installed desktop application instead of a browser web app."
+    },
+    "observed": "The journal records replacing the ChatGPT browser-web-app shortcut with the installed desktop application's chatgpt launcher. The original browser shortcut was not broken."
+  }
+}

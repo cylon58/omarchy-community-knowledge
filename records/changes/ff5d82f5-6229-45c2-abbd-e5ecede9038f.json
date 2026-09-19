@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "ff5d82f5-6229-45c2-abbd-e5ecede9038f",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "bc1e54b3-c9fc-4337-9f12-44789c51c7f6",
+    "intent": "optional",
+    "method": "configuration",
+    "explanation": "Keep the familiar Super+Shift+A shortcut while opening the already-installed desktop application instead of a browser web app.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "package",
+            "name": "openai-codex-desktop"
+          },
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Confirm the desktop application and its chatgpt launcher are installed; do not infer installation from this record.",
+        "Back up the user Hyprland bindings configuration. Use the current Omarchy binding helpers to override the existing Super+Shift+A action with chatgpt, avoiding a duplicate binding.",
+        "Reload the compositor configuration, check for configuration errors, and test the shortcut."
+      ]
+    },
+    "risk": "low",
+    "effects": "Super+Shift+A targets the installed desktop application. Other shortcuts and the application installation are unchanged.",
+    "rollback": "Remove the custom ChatGPT unbind/override entries and reload Hyprland so the packaged web-app binding applies again.",
+    "validation_plan": "Preserve the previous setting, apply only after approval, then perform the final check in the procedure on the actual system.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Apply the setting and perform its documented local check; this record does not execute it."
+    },
+    "affected_files": [
+      "{config}/hypr/bindings.lua"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "b1f57c12-ef55-41a6-a2e1-a9a84e4777ee",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "9b47115c-53ff-4274-9b26-1b91b61f5794",
+    "intent": "optional",
+    "method": "configuration",
+    "explanation": "Use the built-in clock's format setting instead of a new clock plugin.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "shell",
+            "name": "omarchy-shell"
+          },
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Record the existing built-in clock format before changing it.",
+        "Set the built-in clock format with: omarchy bar set omarchy.clock format 'dddd MM/dd/yyyy h:mm AP'.",
+        "Confirm the saved shell configuration and visible clock show the desired weekday, date and AM/PM time."
+      ]
+    },
+    "risk": "low",
+    "effects": "Changes only the displayed clock format, not the system clock or timezone.",
+    "rollback": "Restore the previously saved format; the prior date-and-time-only format was MM/dd/yyyy h:mm AP and the packaged format recorded in the journal was dddd HH:mm.",
+    "validation_plan": "Preserve the previous setting, apply only after approval, then perform the final check in the procedure on the actual system.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Apply the setting and perform its documented local check; this record does not execute it."
+    },
+    "affected_files": [
+      "{config}/omarchy/shell.json"
+    ]
+  }
+}
