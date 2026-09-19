@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "6d08b536-4715-4818-bf79-a3489c93ac05",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import"},
+  "payload": {
+    "case_id": "4e697a1d-ec1f-4778-b75a-908abbe7240c",
+    "change_id": "168aac80-60e9-43c3-8ec2-246cf0fb6dad",
+    "observation_date": "2026-09-15",
+    "environment": {
+      "origin": "journal-import", "architecture": "x86_64", "channel": "unknown", "runtime_mode": "native",
+      "components": [{"alias": "plugin", "selector": {"kind": "software", "component": "plugin", "name": "cylon58.paste-layer"}, "version": "0.1.3", "version_scheme": "semver"}, {"alias": "shell", "selector": {"kind": "software", "component": "shell", "name": "omarchy-shell"}}, {"alias": "compositor", "selector": {"kind": "software", "component": "compositor", "name": "hyprland"}}, {"alias": "typing", "selector": {"kind": "software", "component": "package", "name": "wtype"}}],
+      "topology": {"nodes": ["plugin", "shell", "compositor", "typing"], "edges": [{"from": "plugin", "to": "shell", "relation": "runs_on", "transport": "software"}, {"from": "plugin", "to": "compositor", "relation": "controls", "transport": "software"}, {"from": "plugin", "to": "typing", "relation": "controls", "transport": "software"}]}
+    },
+    "test_method": "Offline model, wrapper, Lua syntax and runtime-stub, editor-contract, manifest, diff, and plugin checks passed. The editor was summoned and dismissed as a normal client, compositor reloads were clean, the universal release binding was present, and mapping-file mode was checked.",
+    "baseline": "reproduced",
+    "expected_result": "The redesigned plugin avoids the two desktop-disrupting implementation failures and performs the intended Menu-key workflow safely enough for ordinary non-credential text.",
+    "result": "partial",
+    "actual_result": "The redesigned menu and static configuration passed the recorded automated and live structural checks, and the editor opened and closed normally. Physical one-tap opening and mapped-text entry were not completed.",
+    "limitations": "This is one journal-imported development sequence. The final interaction remains unverified on the physical key. The mapping store remains plaintext and should not hold credentials. No public source revision exists for this candidate, so the record describes procedures and observations only.",
+    "provenance": "Imported from the private system-change journal without mapping contents, screenshots, private paths, or raw diagnostics.",
+    "adverse_effects": "Before the redesign, an exclusive layer surface trapped keyboard focus and required a reboot; a later live dynamic-binding-removal experiment destabilized the compositor twice. Those failed approaches were removed and are not recommended.",
+    "activation": {"state": "active", "details": "The redesigned menu plugin and guarded static binding loader were enabled, with final physical behavior still pending."},
+    "root_cause": {"assessment": "supported", "rationale": "The journal directly associates the focus trap with the exclusive surface and the compositor disruptions with live dynamic-binding removal; the redesign removes both mechanisms."},
+    "intervention_deviations": "The original service plugin, exclusive editor surface, and dynamic binding lifecycle were abandoned. This report evaluates the later menu-plugin and static-binding redesign.",
+    "workaround_absent": false
+  }
+}

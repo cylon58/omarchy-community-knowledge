@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "62dfeca8-b124-4c9d-9a78-0352959db148",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import", "sources": ["https://github.com/cylon58/omarchy-numpad-shortcuts/commit/b96f7aebc3b291041ce1dfc8a74ae5b2e3f3aad4"]},
+  "payload": {
+    "title": "Use the number pad for workspace movement and consolidation with a built-in guide",
+    "intent": "optional",
+    "domains": ["keybindings", "shell-plugin", "workspaces"],
+    "expectation": {"basis": "user-requested", "text": "Number-pad shortcuts should move windows, protect selected workspaces from consolidation, consolidate workspaces across one or all monitors, and open an explanatory native guide."},
+    "observed": "The custom Numpad Shortcuts plugin expanded beyond workspace selection to provide those optional actions and a guide. This is a personal workflow extension, not behavior Omarchy previously promised."
+  }
+}

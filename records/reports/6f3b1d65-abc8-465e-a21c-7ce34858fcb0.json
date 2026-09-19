@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "6f3b1d65-abc8-465e-a21c-7ce34858fcb0",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import",
+    "sources": [
+      "https://github.com/cylon58/omarchy-tailnet-presence/commit/e8ff8dcdbea2212b897ac3b26bd811dba759a846"
+    ]
+  },
+  "payload": {
+    "case_id": "68f49de4-4d81-4506-9ca3-adbe9c5096bc",
+    "change_id": "3b5d8d28-7309-4714-a262-133642a493df",
+    "observation_date": "2026-09-18",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "x86_64",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {"alias": "plugin", "selector": {"kind": "software", "component": "plugin", "name": "cylon58.tailnet-presence"}, "version": "0.1.1", "version_scheme": "semver"},
+        {"alias": "shell", "selector": {"kind": "software", "component": "shell", "name": "omarchy-shell"}},
+        {"alias": "clipboard", "selector": {"kind": "software", "component": "package", "name": "wl-clipboard"}}
+      ],
+      "topology": {
+        "nodes": ["plugin", "shell", "clipboard"],
+        "edges": [
+          {"from": "plugin", "to": "shell", "relation": "runs_on", "transport": "software"},
+          {"from": "plugin", "to": "clipboard", "relation": "controls", "transport": "software"}
+        ]
+      }
+    },
+    "test_method": "A live QML regression test exercised the managed clipboard process. It failed with the prior restricted environment and passed after the reviewed desktop-session variables were added; the installed service file then matched the tested source.",
+    "baseline": "reproduced",
+    "expected_result": "Using a copy action writes the chosen displayed value to the active Wayland clipboard while command hardening remains enabled.",
+    "result": "success",
+    "actual_result": "The live regression test passed after the environment repair, and the installed plugin retained fixed executable paths, bounded output, and helper deadlines.",
+    "limitations": "This is one private journal import and one desktop session. No machine labels, addresses, Tailnet identifiers, clipboard contents, or raw logs are included. The repair was locally tested but was not part of the cited public revision at observation time.",
+    "provenance": "Imported from the user's private system-change journal and summarized without private network data. The cited public revision establishes the reviewed hardened baseline, not publication of this later repair.",
+    "adverse_effects": "No adverse effect was recorded in the regression test. Clipboard actions intentionally place a user-selected displayed value into the session clipboard.",
+    "activation": {"state": "active", "details": "The journal records the tested service file as installed and active through plugin hot reload."},
+    "root_cause": {"assessment": "supported", "rationale": "The same live test failed with the restricted environment and passed when only the reviewed Wayland desktop-session variables were supplied."},
+    "workaround_absent": false
+  }
+}

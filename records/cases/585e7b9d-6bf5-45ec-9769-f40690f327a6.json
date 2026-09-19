@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "585e7b9d-6bf5-45ec-9769-f40690f327a6",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import", "sources": ["https://github.com/cylon58/omarchy-codex-crash-model-picker/commit/573b86d11cc77e68a33ba1b4cb130ee8be95eabd"]},
+  "payload": {
+    "title": "Crash-diagnosis picker must not place untrusted coredump metadata in an agent prompt",
+    "intent": "corrective",
+    "domains": ["agent", "crash-diagnosis", "shell-plugin"],
+    "expectation": {"basis": "compatibility", "text": "An optional crash-notice plugin may offer a Codex model and reasoning picker, but crash-controlled metadata must not be interpolated into the initial agent prompt and non-Codex agents must retain the standard diagnosis path."},
+    "observed": "Version 1.0.0 of the custom crash picker included coredump metadata in the initial diagnosis prompt. Version 1.0.1 changed the boundary so only a validated process identifier enters the initial prompt while preserving the picker and fallback behavior."
+  }
+}

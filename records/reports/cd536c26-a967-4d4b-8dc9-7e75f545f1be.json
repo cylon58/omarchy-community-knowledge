@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "cd536c26-a967-4d4b-8dc9-7e75f545f1be",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import", "sources": ["https://github.com/cylon58/omarchy-numpad-shortcuts/commit/b96f7aebc3b291041ce1dfc8a74ae5b2e3f3aad4"]},
+  "payload": {
+    "case_id": "62dfeca8-b124-4c9d-9a78-0352959db148",
+    "change_id": "2419ea93-b0ce-4761-a179-fd887ca7f91f",
+    "observation_date": "2026-09-17",
+    "environment": {
+      "origin": "journal-import", "architecture": "x86_64", "channel": "unknown", "runtime_mode": "native",
+      "components": [
+        {"alias": "plugin", "selector": {"kind": "software", "component": "plugin", "name": "cylon58.numpad-shortcuts"}, "version": "0.3.0", "version_scheme": "semver"},
+        {"alias": "shell", "selector": {"kind": "software", "component": "shell", "name": "omarchy-shell"}},
+        {"alias": "compositor", "selector": {"kind": "software", "component": "compositor", "name": "hyprland"}},
+        {"alias": "display", "selector": {"kind": "hardware", "role": "display"}}
+      ],
+      "topology": {"nodes": ["plugin", "shell", "compositor", "display"], "edges": [{"from": "plugin", "to": "shell", "relation": "runs_on", "transport": "software"}, {"from": "shell", "to": "compositor", "relation": "controls", "transport": "software"}, {"from": "display", "to": "compositor", "relation": "connected_to", "transport": "unknown", "detail": "summarized"}]}
+    },
+    "test_method": "Functional and hostile-path tests, exhaustive simulated workspace layouts, offscreen guide scenarios, QML lint, plugin validation, live guide summon, binding inspection, and visual inspection were recorded. Only one monitor was connected.",
+    "baseline": "not-tested",
+    "expected_result": "The optional number-pad actions and guide operate without breaking the existing shortcut workflow, including on multi-monitor layouts.",
+    "result": "partial",
+    "actual_result": "Automated tests, live binding checks, guide summon, and visual inspection passed. The guide opened and the plugin retained its existing shortcut behavior.",
+    "limitations": "Physical multi-monitor behavior was unavailable and remains unverified. The large simulated layout set is not hardware confirmation. Protection resets when its window closes or when the compositor restarts or reloads.",
+    "provenance": "Imported from the private journal with the exact public plugin revision linked; no private desktop state or screenshots are attached.",
+    "adverse_effects": "No adverse effect was recorded in the tested single-monitor session. The plugin runs unsandboxed, changes compositor bindings, and may create an optional launcher entry only after confirmation.",
+    "activation": {"state": "active", "details": "The plugin service and guide panel were active after an Omarchy Shell restart."},
+    "root_cause": {"assessment": "unknown", "rationale": "This is an optional workflow extension rather than a diagnosed defect."}
+  }
+}

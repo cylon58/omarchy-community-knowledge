@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "3b5d8d28-7309-4714-a262-133642a493df",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import",
+    "sources": [
+      "https://github.com/cylon58/omarchy-tailnet-presence/commit/e8ff8dcdbea2212b897ac3b26bd811dba759a846"
+    ]
+  },
+  "payload": {
+    "case_id": "68f49de4-4d81-4506-9ca3-adbe9c5096bc",
+    "intent": "corrective",
+    "method": "plugin",
+    "explanation": "Keep the plugin's fixed executable paths, bounded output, command deadlines, and restricted environment, but pass the minimum reviewed Wayland desktop-session variables to the clipboard helper.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {"kind": "software", "component": "plugin", "name": "cylon58.tailnet-presence"},
+          "presence": true
+        },
+        {
+          "kind": "component",
+          "selector": {"kind": "software", "component": "compositor", "name": "hyprland"},
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Retain the plugin's restricted process environment for every managed command.",
+        "For the clipboard helper only, add the reviewed Wayland desktop-session variables needed to reach the active clipboard.",
+        "Run the clipboard regression test against the restricted environment before and after the change, then compare the installed service file with the tested source."
+      ]
+    },
+    "risk": "medium",
+    "effects": "Copy actions can reach the active Wayland clipboard without restoring the full inherited process environment. The plugin remains unsandboxed and can expose whichever displayed value the user explicitly chooses to copy.",
+    "rollback": "Restore the prior plugin service implementation and allow the shell's plugin hot reload to replace the changed behavior.",
+    "validation_plan": "Verify that the old restricted environment fails the live clipboard test and the reviewed environment passes it for representative label and address actions. Confirm fixed executable paths, output limits, and helper deadlines remain present.",
+    "requires_root": "no",
+    "activation": {
+      "required": "none",
+      "details": "The plugin service file hot reloads in the running shell; restart the shell only if the local runtime does not reload it."
+    },
+    "affected_files": ["{user_config}/omarchy/plugins/cylon58.tailnet-presence/Service.qml"]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "2419ea93-b0ce-4761-a179-fd887ca7f91f",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {"kind": "journal-import", "sources": ["https://github.com/cylon58/omarchy-numpad-shortcuts/commit/b96f7aebc3b291041ce1dfc8a74ae5b2e3f3aad4"]},
+  "payload": {
+    "case_id": "62dfeca8-b124-4c9d-9a78-0352959db148",
+    "intent": "optional",
+    "method": "plugin",
+    "explanation": "Install and enable Numpad Shortcuts 0.3.0 to add number-pad window movement, consolidation controls, and a panel that explains the workspace model and shortcuts.",
+    "applicability": {"requires": [{"kind": "component", "selector": {"kind": "software", "component": "compositor", "name": "hyprland"}, "presence": true}]},
+    "procedure": {"kind": "artifact-reference", "reference": {"artifact_kind": "plugin", "identifier": "cylon58.numpad-shortcuts", "version": "0.3.0", "revision": "b96f7aebc3b291041ce1dfc8a74ae5b2e3f3aad4", "source_description": "MIT-licensed public plugin revision verified on the repository's main branch", "url": "https://github.com/cylon58/omarchy-numpad-shortcuts/commit/b96f7aebc3b291041ce1dfc8a74ae5b2e3f3aad4"}},
+    "risk": "medium",
+    "effects": "The unsandboxed plugin registers dynamic compositor bindings and provides a shell panel. Consolidation protection is temporary and applies only to consolidation operations.",
+    "rollback": "Disable and remove the plugin, restart Omarchy Shell, and reload the compositor so its dynamic bindings are absent.",
+    "validation_plan": "Validate the plugin and QML, test guide toggle and dismissal, inspect all expected live bindings, exercise representative workspace actions, and test multi-monitor behavior physically when more than one monitor is available.",
+    "requires_root": "no",
+    "activation": {"required": "service-restart", "details": "Restart Omarchy Shell after enabling the plugin so its service and panel load cleanly."},
+    "affected_files": ["{user_config}/omarchy/plugins/cylon58.numpad-shortcuts/", "{user_config}/omarchy/shell.json"]
+  }
+}
