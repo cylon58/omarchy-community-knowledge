@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "9b47115c-53ff-4274-9b26-1b91b61f5794",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Show weekday, numeric date and 12-hour time in the Omarchy bar clock",
+    "intent": "optional",
+    "domains": [
+      "clock",
+      "desktop-preference"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Use the built-in clock's format setting instead of a new clock plugin."
+    },
+    "observed": "The user preferred a weekday, month/day/year date and 12-hour time with AM/PM. The final recorded format adds the weekday to an earlier date-and-time-only preference."
+  }
+}

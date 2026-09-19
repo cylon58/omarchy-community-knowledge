@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "7a2e47fe-b9dd-4538-8ea3-e5148036e1bd",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "b805ca0a-5c0f-4796-a530-197a6bc12ceb",
+    "intent": "optional",
+    "method": "configuration",
+    "explanation": "Use Omarchy's chosen-agent setting so the normal Agent shortcut starts the preferred supported agent.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "package",
+            "name": "codex"
+          },
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Confirm Codex is installed or review Omarchy's installation prompt before proceeding.",
+        "Use Omarchy's default-agent selector to choose Codex. The command omarchy default agent codex can install or launch the selected agent; it is not a read-only probe.",
+        "Read omarchy default agent with no arguments to check the selected label, then test the Agent shortcut."
+      ]
+    },
+    "risk": "low",
+    "effects": "Changes the default agent selected by Omarchy, not the model or settings inside other agents.",
+    "rollback": "Select the previously preferred supported agent using Omarchy's default-agent selector.",
+    "validation_plan": "Preserve the previous setting, apply only after approval, then perform the final check in the procedure on the actual system.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Apply the setting and perform its documented local check; this record does not execute it."
+    },
+    "affected_files": [
+      "{config}/omarchy/defaults/agent"
+    ]
+  }
+}

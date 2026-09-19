@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "06d5ae82-d5e7-4da5-80aa-5db45451361e",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "b805ca0a-5c0f-4796-a530-197a6bc12ceb",
+    "change_id": "7a2e47fe-b9dd-4538-8ea3-e5148036e1bd",
+    "observation_date": "2026-09-06",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "x86_64",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "application",
+          "selector": {
+            "kind": "software",
+            "component": "package",
+            "name": "codex"
+          }
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "application"
+        ],
+        "edges": []
+      }
+    },
+    "test_method": "The journal records the selected setting and shortcut behavior; no detailed physical-key test protocol was preserved.",
+    "baseline": "not-tested",
+    "expected_result": "Use Omarchy's chosen-agent setting so the normal Agent shortcut starts the preferred supported agent.",
+    "result": "partial",
+    "actual_result": "Codex was recorded as the selected default and Agent shortcut target. The current read-only setting also returns codex.",
+    "limitations": "Optional user preference. This record does not establish other agents' behavior or automatic skill discovery.",
+    "provenance": "Sanitized import of the system-change journal; no private paths, raw logs or personal identifiers are included.",
+    "adverse_effects": "No adverse effect was recorded for this preference; this is not proof that none can occur.",
+    "activation": {
+      "state": "active",
+      "details": "The journal records this as the chosen configuration, not as a correction to stock Omarchy."
+    },
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "No defect or causal diagnosis is claimed: this is a requested preference."
+    }
+  }
+}

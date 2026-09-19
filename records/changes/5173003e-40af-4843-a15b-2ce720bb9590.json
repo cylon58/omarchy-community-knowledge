@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "5173003e-40af-4843-a15b-2ce720bb9590",
+  "type": "change",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "46e26c7c-ae1c-4388-86af-288801d9460e",
+    "intent": "optional",
+    "method": "configuration",
+    "explanation": "Select the installed Ghostty desktop entry before other terminal entries in the user terminal preference order.",
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "selector": {
+            "kind": "software",
+            "component": "terminal",
+            "name": "ghostty"
+          },
+          "presence": true
+        }
+      ]
+    },
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Confirm the Ghostty desktop entry is installed and usable.",
+        "Back up the user xdg-terminals.list file and place com.mitchellh.ghostty.desktop first while preserving any other entries.",
+        "Launch a terminal through xdg-terminal-exec and confirm the expected application opens."
+      ]
+    },
+    "risk": "low",
+    "effects": "Changes terminal preference order for callers using xdg-terminal-exec.",
+    "rollback": "Restore the previous order or remove the Ghostty entry from the user preference list.",
+    "validation_plan": "Preserve the previous setting, apply only after approval, then perform the final check in the procedure on the actual system.",
+    "requires_root": "no",
+    "activation": {
+      "required": "manual",
+      "details": "Apply the setting and perform its documented local check; this record does not execute it."
+    },
+    "affected_files": [
+      "{config}/xdg-terminals.list"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "b805ca0a-5c0f-4796-a530-197a6bc12ceb",
+  "type": "case",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "title": "Choose Codex as the default Omarchy agent",
+    "intent": "optional",
+    "domains": [
+      "agent",
+      "desktop-preference"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Use Omarchy's chosen-agent setting so the normal Agent shortcut starts the preferred supported agent."
+    },
+    "observed": "The system-change journal records selecting Codex as the default agent and the Agent shortcut launching Codex. This is an optional preference, not a defect in another agent."
+  }
+}

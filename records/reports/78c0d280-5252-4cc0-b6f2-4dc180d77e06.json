@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "78c0d280-5252-4cc0-b6f2-4dc180d77e06",
+  "type": "report",
+  "created_at": "2026-09-18T21:08:00Z",
+  "provenance": {
+    "kind": "journal-import"
+  },
+  "payload": {
+    "case_id": "bc1e54b3-c9fc-4337-9f12-44789c51c7f6",
+    "change_id": "ff5d82f5-6229-45c2-abbd-e5ecede9038f",
+    "observation_date": "2026-09-16",
+    "environment": {
+      "origin": "journal-import",
+      "architecture": "x86_64",
+      "channel": "unknown",
+      "runtime_mode": "native",
+      "components": [
+        {
+          "alias": "application",
+          "selector": {
+            "kind": "software",
+            "component": "package",
+            "name": "openai-codex-desktop"
+          }
+        }
+      ],
+      "topology": {
+        "nodes": [
+          "application"
+        ],
+        "edges": []
+      }
+    },
+    "test_method": "The journal records the active launcher change. Current read-only configuration inspection confirms the override; no new physical shortcut test was performed for this import.",
+    "baseline": "not-tested",
+    "expected_result": "Keep the familiar Super+Shift+A shortcut while opening the already-installed desktop application instead of a browser web app.",
+    "result": "partial",
+    "actual_result": "The shortcut was recorded as launching chatgpt, and the custom binding remains present.",
+    "limitations": "Requires the separately installed application. This record does not recommend a download source or establish app compatibility on other systems.",
+    "provenance": "Sanitized import of the system-change journal; no private paths, raw logs or personal identifiers are included.",
+    "adverse_effects": "No adverse effect was recorded for this preference; this is not proof that none can occur.",
+    "activation": {
+      "state": "active",
+      "details": "The journal records this as the chosen configuration, not as a correction to stock Omarchy."
+    },
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "No defect or causal diagnosis is claimed: this is a requested preference."
+    }
+  }
+}
