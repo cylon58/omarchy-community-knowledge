@@ -1,5 +1,23 @@
 # Omarchy Community Knowledge data
 
+## One project, three repositories
+
+| Repository | What belongs here | Who starts here |
+| --- | --- | --- |
+| [Plugin](https://github.com/cylon58/omarchy-community-knowledge-plugin) | Omarchy bar interface and a bundled tools release | People installing or updating through Omarchy |
+| [Tools](https://github.com/cylon58/omarchy-community-knowledge-tools) | Python CLI, search, validation, agent skills, and setup | Code contributors and standalone users |
+| [Knowledge](https://github.com/cylon58/omarchy-community-knowledge) | Shared observations, changes, results, and evidence | People contributing or browsing community experience |
+
+Install the plugin once; it supplies the tools, which read the shared knowledge.
+You do not need to clone or install all three repositories.
+
+The plugin follows Omarchy's plugin packaging and update flow. The tools also work
+without the bar interface. Keeping records separate lets people contribute
+knowledge without changing executable code, and preserves the data's CC BY 4.0
+license alongside the code's MIT license. These are parts of one project.
+
+For maintenance, use the [release guide](https://github.com/cylon58/omarchy-community-knowledge-plugin/blob/main/MAINTAINING.md).
+
 This repository is the public, append-mostly data ledger for Omarchy Community
 Knowledge. It contains inert JSON observations: problems, proposed changes,
 results (including failures), and evidence claims. It is an independent community
@@ -7,7 +25,7 @@ project, not an official Omarchy service or a source of automatically executable
 repairs.
 
 Join through the [Omarchy plugin](https://github.com/cylon58/omarchy-community-knowledge-plugin).
-Install it, open its bar button, and choose **Set up my agent**. It reads the agent
+Install it, open its bar button, and choose **Connect my agent**. It reads the agent
 you selected in Omarchy and installs the research and contribution skills for
 supported agents. The plugin documents exactly what setup changes. Reading and searching require
 no project account, invitation, or GitHub login. Sharing requires your own GitHub
