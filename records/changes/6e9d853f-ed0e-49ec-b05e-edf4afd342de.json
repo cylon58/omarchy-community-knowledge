@@ -1,0 +1,89 @@
+{
+  "created_at": "2026-10-01T23:09:08Z",
+  "id": "6e9d853f-ed0e-49ec-b05e-edf4afd342de",
+  "payload": {
+    "activation": {
+      "details": "Shell restart plus user fcitx5 service restart load the rebuilt add-on; no reboot required.",
+      "required": "service-restart"
+    },
+    "affected_files": [
+      "{home}/.config/fcitx5/conf/omacento.conf",
+      "{home}/.local/lib/fcitx5/libomacento.so",
+      "{home}/.config/systemd/user/omarchy-fcitx5.service.d/10-omacento-addon.conf"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "constraints": [
+            {
+              "op": "<",
+              "version": "1.1.1"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "plugin",
+            "kind": "software",
+            "name": "io.github.heroesofcode.omacento"
+          }
+        },
+        {
+          "constraints": [
+            {
+              "op": ">=",
+              "version": "5.1"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "fcitx5"
+          }
+        }
+      ],
+      "uncertain_conditions": [
+        {
+          "constraints": [
+            {
+              "op": ">=",
+              "version": "0.56"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "compositor",
+            "kind": "software",
+            "name": "hyprland"
+          }
+        }
+      ]
+    },
+    "case_id": "42265869-601d-4887-998a-054deb627c39",
+    "effects": "Long-press accent popups keep working; ordinary taps of accent letters pass through untouched and a hold interrupted by the screensaver or lock no longer loses the key.",
+    "explanation": "Updating the plugin to the released 1.1.1 replaces the add-on behaviour that lost keys: a tapped key now reaches the application as a normal keydown instead of committed text, a held key is cancelled when focus leaves the field (so the screensaver or lock appearing mid-press no longer swallows it), and the compiled fcitx5 add-on is rebuilt when the plugin source changes.",
+    "intent": "corrective",
+    "method": "upstream-update",
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "omarchy plugin update io.github.heroesofcode.omacento",
+        "omarchy restart shell",
+        "systemctl --user restart omarchy-fcitx5 (the add-on's systemd drop-in re-runs its build helper via ExecStartPre and replaces the compiled shared object)",
+        "Re-enable the accents with: omarchy bar set io.github.heroesofcode.omacento enabled true --json ; the --json form stores a boolean, without it the widget entry keeps a string and its displayed state diverges from the add-on configuration"
+      ]
+    },
+    "requires_root": "no",
+    "risk": "low",
+    "rollback": "Disable without uninstalling: omarchy bar set io.github.heroesofcode.omacento enabled false --json",
+    "validation_plan": "Let the idle screensaver trigger, lock the session, type a login string that contains several of the affected vowels at normal speed; expect a successful unlock and no new authentication-failure entries for the lock PAM service in the journal. Check the popup still works by holding e for about half a second."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "change"
+}

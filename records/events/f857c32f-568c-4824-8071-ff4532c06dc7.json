@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-10-01T23:09:08Z",
+  "id": "f857c32f-568c-4824-8071-ff4532c06dc7",
+  "payload": {
+    "event_kind": "upstream-resolution",
+    "reason": "The maintainers acknowledged the swallowed-letter behaviour as issue #10 and shipped fixes in release 1.1.1 (held key cancelled on focus-out; tap forwarded as keydown; add-on rebuilt on update). This machine updated to it and validated at the lock screen.",
+    "resolution": {
+      "fixed_in": {
+        "any_of": [
+          {
+            "all_of": [
+              {
+                "constraints": [
+                  {
+                    "op": ">=",
+                    "version": "1.1.1"
+                  }
+                ],
+                "kind": "software",
+                "scheme": "semver",
+                "selector": {
+                  "component": "plugin",
+                  "kind": "software",
+                  "name": "io.github.heroesofcode.omacento"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "relevance": "claimed",
+      "restart_required": "unknown",
+      "upstream_url": "https://github.com/heroesofcode/omacento/releases/tag/v1.1.1"
+    },
+    "supporting_links": [
+      "https://github.com/heroesofcode/omacento/releases/tag/v1.1.1",
+      "https://github.com/heroesofcode/omacento/issues/10"
+    ],
+    "targets": [
+      {
+        "id": "42265869-601d-4887-998a-054deb627c39",
+        "type": "case"
+      },
+      {
+        "id": "6e9d853f-ed0e-49ec-b05e-edf4afd342de",
+        "type": "change"
+      }
+    ]
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "event"
+}
