@@ -1,0 +1,112 @@
+{
+  "created_at": "2026-10-01T23:09:08Z",
+  "id": "5ca3f54e-b962-4295-982b-be354cc220c3",
+  "payload": {
+    "activation": {
+      "details": "User fcitx5 service runs the rebuilt add-on with accents enabled.",
+      "state": "active"
+    },
+    "actual_result": "Unlock succeeded on the first attempt, all characters registered, journal showed no authentication failures for the lock PAM service after the update; the accent popup still opens on a long hold.",
+    "adverse_effects": "None observed.",
+    "baseline": "reproduced",
+    "case_id": "42265869-601d-4887-998a-054deb627c39",
+    "change_id": "6e9d853f-ed0e-49ec-b05e-edf4afd342de",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "omacento",
+          "selector": {
+            "component": "plugin",
+            "kind": "software",
+            "name": "io.github.heroesofcode.omacento"
+          },
+          "version": "1.1.1",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "fcitx5",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "fcitx5"
+          },
+          "version": "5.1.22",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "omarchy",
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          },
+          "version": "4.0.4",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "component": "compositor",
+            "kind": "software",
+            "name": "hyprland"
+          },
+          "version": "0.56.2",
+          "version_scheme": "semver"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "omarchy",
+            "relation": "contains",
+            "to": "hyprland"
+          },
+          {
+            "detail": "exact",
+            "from": "hyprland",
+            "relation": "runs_on",
+            "to": "workstation"
+          },
+          {
+            "detail": "exact",
+            "from": "fcitx5",
+            "relation": "runs_on",
+            "to": "workstation"
+          },
+          {
+            "detail": "exact",
+            "from": "omacento",
+            "relation": "runs_on",
+            "to": "fcitx5"
+          }
+        ],
+        "nodes": [
+          "workstation",
+          "omarchy",
+          "hyprland",
+          "fcitx5",
+          "omacento"
+        ]
+      }
+    },
+    "expected_result": "Unlock on the first attempt with every character registered, and no new lock authentication-failure entries in the journal.",
+    "limitations": "Single-session verification; several days of repeated lock and sleep cycles were not yet observed at reporting time.",
+    "observation_date": "2026-10-01",
+    "provenance": "Firsthand observation by the affected user on their own workstation.",
+    "result": "success",
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "The pre-release add-on registered a key watcher before the input method and consumed keydown events for 20 accent keys, delivering the letter as committed text only on key release. When the screensaver or lock overlay took keyboard focus mid-press, the release never reached that input context, so the letter never arrived at the unlock field; fast typing amplified the per-key delay into scrambled words."
+    },
+    "test_method": "After the update, let the idle screensaver show, locked the session, and typed the usual unlock string (contains several affected vowels) at normal typing speed; repeated once while deliberately holding a vowel past the popup delay. Watched the journal for new lock authentication failures."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "report"
+}

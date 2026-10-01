@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-10-01T23:09:08Z",
+  "id": "42265869-601d-4887-998a-054deb627c39",
+  "payload": {
+    "domains": [
+      "input",
+      "lock",
+      "plugins",
+      "idle"
+    ],
+    "expectation": {
+      "basis": "previously-working",
+      "text": "Typing after the idle screensaver or the Quickshell lock overlay should produce exactly the characters pressed, as it did earlier in the same session."
+    },
+    "intent": "corrective",
+    "introduced_by": "Installing plugin io.github.heroesofcode.omacento built from an unreleased commit (manifest version 2.0.0, dated 21-Sep) whose fcitx5 add-on consumed keydown events and only emitted the letter on key release.",
+    "observed": "After the idle screensaver (60 s) or a lock on Omarchy's Quickshell lock screen, letters a e i o u c n y s z (and their capitals) disappeared mid-word and fast typing came out scrambled, so the unlock attempt failed with repeated authentication-failure entries for the omarchy-lock PAM service in the journal; the session could only be recovered by holding the power button (three forced reboots in one evening). Turning the widget's accents off stopped the interference immediately; turning them back on brought it back.",
+    "title": "Screensaver and lock overlay drop accented letters typed through an fcitx5 long-press add-on"
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "case"
+}
