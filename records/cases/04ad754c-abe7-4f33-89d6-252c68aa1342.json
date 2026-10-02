@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-10-02T00:22:46Z",
+  "id": "04ad754c-abe7-4f33-89d6-252c68aa1342",
+  "payload": {
+    "domains": [
+      "wifi",
+      "network",
+      "hotspot"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Serve two independent Wi-Fi hotspots (separate radios, subnets and bands) from a wired desktop for tablet game streaming and guest devices, without hostapd or an extra DNS daemon, and switch between fixed mode combinations with single commands."
+    },
+    "intent": "optional",
+    "observed": "A maintained shell suite does this on Arch/Omarchy with plain NetworkManager: six AP-mode connection profiles (ipv4.method shared, ipv4.never-default, WPA2/RSN, PMF optional) over an internal PCIe MediaTek MT7922 (mt7921e) and a USB MT7921U; each raised hotspot starts its own ephemeral dnsmasq that applies drop-ins in /etc/NetworkManager/dnsmasq-shared.d (dhcp-authoritative, WPAD suppression, larger cache, optional local resolver handed to clients via dhcp-option); the wired interface NATs clients; every mode script resets to a clean off baseline, sets the regulatory country explicitly with a verified retry loop, and a status dashboard reads the live state back. Modes as one-word aliases: web-2g, web-5g, web-dual, web-two (stable tablet AP + external 5 GHz), web-max and dual variants (160 MHz via the separate wpa_supplicant D-Bus recipe), web-off, web-info, web-status, web-manual, web-links. Documented with setup and install scripts at https://github.com/Lobachevski1998/omarchy-web-tools. Live-verified with NetworkManager 1.58.1 running dual AP (5 GHz internal ch36/80 plus 2.4 GHz external ch11/20).",
+    "title": "Two simultaneous access points with NAT sharing on one desktop using NetworkManager only (web-tools suite)"
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "case"
+}

@@ -1,0 +1,141 @@
+{
+  "created_at": "2026-10-02T00:22:46Z",
+  "id": "ccf69d95-6456-4535-ae84-97c07cacaea3",
+  "payload": {
+    "activation": {
+      "details": "Both hotspots were serving at audit time; profiles and aliases in place.",
+      "state": "active"
+    },
+    "actual_result": "All six profiles present and matching the documented design; live state healthy during the audit with the internal radio on 5 GHz channel 36 at 80 MHz and the USB radio on 2.4 GHz channel 11, base regulatory country active, per-connection dnsmasq serving the configured ranges and clients resolving through the advertised resolver.",
+    "adverse_effects": "None observed during the audit; mode switches restart the involved radios and clients must re-associate, by design.",
+    "baseline": "not-tested",
+    "case_id": "04ad754c-abe7-4f33-89d6-252c68aa1342",
+    "change_id": "c630be98-9cc8-4ab8-ac04-9dfc98e324c4",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "role": "host"
+          }
+        },
+        {
+          "alias": "radio-int",
+          "selector": {
+            "kind": "hardware",
+            "product": "MT7922",
+            "role": "network",
+            "vendor": "MediaTek"
+          }
+        },
+        {
+          "alias": "radio-ext",
+          "selector": {
+            "kind": "hardware",
+            "product": "MT7921U",
+            "role": "network",
+            "vendor": "MediaTek"
+          }
+        },
+        {
+          "alias": "networkmanager",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "networkmanager"
+          },
+          "version": "1.58.1",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "iw",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "iw"
+          },
+          "version": "6.17",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "kernel",
+          "selector": {
+            "component": "kernel",
+            "kind": "software"
+          },
+          "version": "7.2.5",
+          "version_scheme": "semver"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "radio-int",
+            "relation": "connected_to",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "radio-ext",
+            "relation": "connected_to",
+            "to": "host",
+            "transport": "usb"
+          },
+          {
+            "detail": "exact",
+            "from": "networkmanager",
+            "relation": "runs_on",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "networkmanager",
+            "relation": "controls",
+            "to": "radio-int"
+          },
+          {
+            "detail": "exact",
+            "from": "networkmanager",
+            "relation": "controls",
+            "to": "radio-ext"
+          },
+          {
+            "detail": "exact",
+            "from": "kernel",
+            "relation": "runs_on",
+            "to": "host"
+          }
+        ],
+        "nodes": [
+          "host",
+          "radio-int",
+          "radio-ext",
+          "networkmanager",
+          "iw",
+          "kernel"
+        ]
+      }
+    },
+    "expected_result": "Dual access points stable, clients served with DHCP and DNS through the documented path, modes switchable by single commands.",
+    "limitations": "Audited on MT7922 plus MT7921U with NetworkManager 1.58.1 only; other radios or versions untested. The suite assumes a wired uplink for NAT. Multi-day soak results and the 160 MHz mode were not part of this audit; the 160 MHz width is documented as a separate record in this knowledge base.",
+    "observation_date": "2026-10-01",
+    "provenance": "Firsthand configuration audit on the machine running the suite, performed by the person who maintains it.",
+    "result": "success",
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "Not applicable: this record documents a working configuration suite, not a defect; no failure was being diagnosed."
+    },
+    "test_method": "Configuration audit on the live machine while both hotspots were serving: every WEB-* profile field checked against the documented design (mode ap, band, channel, shared method, never-default, WPA2 RSN/CCMP with PMF optional, permanent MAC, powersave disabled), the two running ephemeral dnsmasq instances confirmed loading the shared conf-dir drop-ins, regulatory country read back with iw, and the advertised resolver queried successfully."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "report"
+}
