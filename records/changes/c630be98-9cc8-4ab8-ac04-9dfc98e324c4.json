@@ -1,0 +1,80 @@
+{
+  "created_at": "2026-10-02T00:22:46Z",
+  "id": "c630be98-9cc8-4ab8-ac04-9dfc98e324c4",
+  "payload": {
+    "activation": {
+      "details": "Profiles persist after the one-time creation; aliases apply to each new shell; no reboot needed.",
+      "required": "manual"
+    },
+    "affected_files": [
+      "{home}/web-tools/config.sh",
+      "{home}/.alias",
+      "{etc}/NetworkManager/dnsmasq-shared.d/"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "kind": "hardware",
+            "product": "MT7922",
+            "role": "network",
+            "vendor": "MediaTek"
+          }
+        },
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "kind": "hardware",
+            "product": "MT7921U",
+            "role": "network",
+            "vendor": "MediaTek"
+          }
+        }
+      ],
+      "uncertain_conditions": [
+        {
+          "constraints": [
+            {
+              "op": "!=",
+              "version": "1.58.1"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "networkmanager"
+          }
+        }
+      ]
+    },
+    "case_id": "04ad754c-abe7-4f33-89d6-252c68aa1342",
+    "effects": "Two access points on isolated subnets NATed through the wired uplink; clients get fast DHCP and DNS from per-connection dnsmasq; switching modes briefly restarts the involved radios and clients re-associate; nothing runs as an added daemon beyond NetworkManager's own ephemeral dnsmasq.",
+    "explanation": "Install path is three steps: one-time profile creation (sudo, the shared passphrase is prompted with read -s and only ever lands in root-owned NetworkManager connection files, never in the repo), alias installation into ~/.alias, and optional dnsmasq-shared drop-ins. Machine-specific values live in a gitignored config.sh sourced through one shared loader: SSID prefix, the two radio interface names, subnet gateways, base and wide regulatory country codes, optional resolver address; published scripts therefore keep no personal values. Mode scripts always begin from the full-off baseline and end asserting the intended regulatory country, so switching is idempotent, and web-off restores the base country.",
+    "intent": "optional",
+    "method": "configuration",
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "git clone the repository into ~/web-tools, copy config.example.sh to config.sh, set SSID_PREFIX, the radio interface names from iw dev, the two subnet gateway hosts, and the base and wide regulatory country codes",
+        "Run ./install.sh to add the web-* aliases to ~/.alias idempotently, then reload the shell",
+        "Create the profiles once: sudo ./setup-profiles.sh (it prompts for the shared passphrase interactively)",
+        "Optional: copy the two files under etc/NetworkManager/dnsmasq-shared.d/ into that system directory for DHCP/DNS tuning and a local resolver for clients",
+        "Operate with the aliases: web-dual or web-two for normal use, web-max variants for the 160 MHz access point, web-off to stop everything and restore the base regulatory country, web-status for the read-only live view"
+      ]
+    },
+    "requires_root": "yes",
+    "risk": "low",
+    "rollback": "sudo nmcli connection delete on each WEB-* profile, remove the alias block from the shell alias file, remove the two optional dnsmasq drop-ins; no service is installed by the suite itself.",
+    "validation_plan": "web-status shows both access points with the expected channels and widths and the intended regulatory country; a test client joins each SSID, receives an address in the configured range, and name resolution goes through the advertised resolver."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "change"
+}
