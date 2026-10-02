@@ -1,0 +1,81 @@
+{
+  "created_at": "2026-10-02T00:48:44Z",
+  "id": "bbca4226-3007-49a2-8ec1-3d57367147de",
+  "payload": {
+    "activation": {
+      "details": "The board dispatcher and gateway must be running (normal Hermes session); scripts apply immediately after install.",
+      "required": "manual"
+    },
+    "affected_files": [
+      "{home}/.hermes/profiles/director/",
+      "{home}/.hermes/profiles/science/",
+      "{home}/.hermes/profiles/genio/",
+      "{home}/.hermes/profiles/runner/",
+      "{home}/.hermes/profiles/audit/",
+      "{home}/.hermes/profiles/review/",
+      "{home}/.local/bin/hermes-science-dag",
+      "{home}/.local/bin/hermes-science-swarm"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "constraints": [
+            {
+              "op": "=",
+              "version": "*"
+            }
+          ],
+          "kind": "software",
+          "scheme": "upstream",
+          "selector": {
+            "component": "other",
+            "kind": "software",
+            "name": "hermes-agent"
+          }
+        },
+        {
+          "constraints": [
+            {
+              "op": ">=",
+              "version": "6.0"
+            }
+          ],
+          "kind": "software",
+          "scheme": "arch",
+          "selector": {
+            "component": "kernel",
+            "kind": "software"
+          }
+        }
+      ],
+      "uncertain_conditions": []
+    },
+    "case_id": "d2684f5c-669d-4068-afb2-38f8b7899e3f",
+    "effects": "Six personas active on the Hermes board with two one-command pipeline recipes; human-gated conclusions by notification; per-profile model and tool configuration isolated from other agents.",
+    "explanation": "Install is deliberately conservative because the profiles are full runtime homes: ./install.sh runs in dry-run by default and --apply writes; an existing SOUL.md or config.yaml is skipped unless --force, and config.yaml is only created from config.example.yaml when absent; memories, auth, databases and logs are never touched. Credential-shaped values are placeholders to be filled by the operator. Two orchestration commands are installed into the user bin directory. Vendored skills are named, not copied, in skill.lock.json.",
+    "intent": "optional",
+    "method": "configuration",
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "git clone https://github.com/Lobachevski1998/hermes-stack ~/hermes-stack",
+        "cd ~/hermes-stack and run ./install.sh to preview the writes",
+        "Run ./install.sh --apply (add --force only if you intend to overwrite existing personas)",
+        "Fill the placeholders in each created config.yaml: the notification topic variable and your own model endpoints; keep credentials out of the files",
+        "Invoke the pipelines by goal: hermes-science-dag --mode analysis \"goal\" or --mode compute \"goal\", or the lighter hermes-science-swarm \"goal\""
+      ]
+    },
+    "requires_root": "no",
+    "risk": "low",
+    "rollback": "Delete the created profile directories under ~/.hermes/profiles and the two commands from the user bin directory; nothing else is written.",
+    "validation_plan": "A small analysis-mode goal should produce board cards for science and genio, then audit and review, ending with a director synthesis; the compute mode additionally shows a runner stage between reasoning and audit."
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/Lobachevski1998/hermes-stack"
+    ]
+  },
+  "schema_version": 1,
+  "type": "change"
+}
