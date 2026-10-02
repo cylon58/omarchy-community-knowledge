@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-10-02T00:48:44Z",
+  "id": "d2684f5c-669d-4068-afb2-38f8b7899e3f",
+  "payload": {
+    "domains": [
+      "agents",
+      "workflow",
+      "orchestration"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "Research-grade multi-agent reasoning on a single machine with enforced epistemic discipline: independent analyses, adversarial verification, computational evidence through a dedicated executor, and material conclusions gated by a human, all driven through the Hermes Kanban board."
+    },
+    "intent": "optional",
+    "observed": "A maintained stack published at https://github.com/Lobachevski1998/hermes-stack runs six Hermes agent profiles as cooperating personas (director, science, genio, runner, audit, review), each a separate runtime home under ~/.hermes/profiles. The director plans the smallest sufficient workflow graph and never lets a worker completion imply validation; science and genio produce deliberately independent reasoning; runner carries numerical implementation; audit is adversarial over claims, numerics, provenance and epistemic status; review is the final integration gate. Two shell recipes wrap the board: a two-mode DAG (analysis without new computation; compute with a runner stage; either way science+genio then audit then review then director final) and a lighter swarm with two workers, an audit verifier and a review synthesizer. Persona files encode explicit category separation (observation, measurement, hypothesis, supported interpretation, validated numerical result, formal proof, inconclusive, refuted, superseded) and prohibit silent reconciliation of conflicting evidence. Event-driven dispatch uses a single post-create nudge plus the Gateway sweep as the recovery path, with concurrency treated as capacity rather than quota, and material conclusions reach the human through a public notification topic. The public repository ships sanitized persona and config examples only; memories, authentication state, sessions, logs and third-party skill packs are never redistributed (vendored skills are listed by name in a lockfile).",
+    "title": "Scientific six-persona multi-agent stack on Hermes: Kanban DAG and swarm orchestration with epistemic role separation"
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/Lobachevski1998/hermes-stack"
+    ]
+  },
+  "schema_version": 1,
+  "type": "case"
+}

@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-10-02T00:48:44Z",
+  "id": "a0150e4a-8891-404d-aba6-39e16fad5d6b",
+  "payload": {
+    "activation": {
+      "details": "Profiles and commands in place and in regular use.",
+      "state": "active"
+    },
+    "actual_result": "All six profiles and both commands verified present and matching the published stack; the pipeline pattern had been exercised for weeks on real goals without board-level failures found during the audit.",
+    "adverse_effects": "None observed; concurrent persona usage increases model call volume by design.",
+    "baseline": "not-tested",
+    "case_id": "d2684f5c-669d-4068-afb2-38f8b7899e3f",
+    "change_id": "bbca4226-3007-49a2-8ec1-3d57367147de",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "role": "host"
+          }
+        },
+        {
+          "alias": "kernel",
+          "selector": {
+            "component": "kernel",
+            "kind": "software"
+          },
+          "version": "7.2.5",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "hermes-agent",
+          "selector": {
+            "component": "other",
+            "kind": "software",
+            "name": "hermes-agent"
+          },
+          "version": "unknown",
+          "version_scheme": "upstream"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "hermes-agent",
+            "relation": "runs_on",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "kernel",
+            "relation": "runs_on",
+            "to": "host"
+          }
+        ],
+        "nodes": [
+          "host",
+          "kernel",
+          "hermes-agent"
+        ]
+      }
+    },
+    "expected_result": "Personas and commands in place, with the board able to run the documented DAG and swarm graphs.",
+    "limitations": "Single machine, single Hermes runtime; personas are tuned for scientific numerical workflows and generalization is untested; no fresh end-to-end pipeline run was performed during the audit itself; published repository excludes memories and credentials by design, so reproducibility on another machine requires the operator's own model endpoints.",
+    "observation_date": "2026-10-01",
+    "provenance": "Firsthand audit on the machine running the stack, performed by its maintainer.",
+    "result": "success",
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "Not applicable: this record documents a working configuration stack, not a defect."
+    },
+    "test_method": "Stack audit on the machine: all six profile homes present with persona and config files on disk, both orchestration commands installed and executable on the user path, and the Kanban pipelines exercised repeatedly through several workspaces and multi-day task campaigns since the stack was introduced; this audit checked presence and consistency rather than re-running a fresh pipeline."
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/Lobachevski1998/hermes-stack"
+    ]
+  },
+  "schema_version": 1,
+  "type": "report"
+}
