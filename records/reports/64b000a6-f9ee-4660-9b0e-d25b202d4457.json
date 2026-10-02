@@ -1,0 +1,135 @@
+{
+  "created_at": "2026-10-02T00:07:20Z",
+  "id": "64b000a6-f9ee-4660-9b0e-d25b202d4457",
+  "payload": {
+    "activation": {
+      "details": "Installed on this machine as per-session wrapper scripts run whenever the 160 MHz hotspot is raised.",
+      "state": "active"
+    },
+    "actual_result": "Every run of the wrapper has brought the AP to 160 MHz within about 2 s of the D-Bus re-association; clients with wider-capable chipsets link at the 160 MHz width; the fallback path restores 36/80 on failure.",
+    "adverse_effects": "Brief AP disconnect of already-connected clients (about 0.5-2 s) during the Disconnect/SelectNetwork cycle.",
+    "baseline": "reproduced",
+    "case_id": "cca548f0-fa5b-4026-8e14-35e918f13cbd",
+    "change_id": "0864e685-3327-4572-a588-4de48fe22ff8",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "role": "host"
+          }
+        },
+        {
+          "alias": "radio-int",
+          "selector": {
+            "kind": "hardware",
+            "product": "MT7922",
+            "role": "network",
+            "vendor": "MediaTek"
+          }
+        },
+        {
+          "alias": "networkmanager",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "networkmanager"
+          },
+          "version": "1.58.1",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "wpasupplicant",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "wpa_supplicant"
+          },
+          "version": "2.12",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "iw",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "iw"
+          },
+          "version": "6.17",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "kernel",
+          "selector": {
+            "component": "kernel",
+            "kind": "software"
+          },
+          "version": "7.2.5",
+          "version_scheme": "semver"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "radio-int",
+            "relation": "connected_to",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "networkmanager",
+            "relation": "runs_on",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "wpasupplicant",
+            "relation": "runs_on",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "wpasupplicant",
+            "relation": "controls",
+            "to": "radio-int"
+          },
+          {
+            "detail": "exact",
+            "from": "kernel",
+            "relation": "runs_on",
+            "to": "host"
+          }
+        ],
+        "nodes": [
+          "host",
+          "radio-int",
+          "networkmanager",
+          "wpasupplicant",
+          "iw",
+          "kernel"
+        ]
+      }
+    },
+    "expected_result": "iw dev shows width 160 MHz within seconds of the patch and 160 MHz-capable clients use the wider channel.",
+    "limitations": "Observed on the MT7922 (mt7921e) driver stack only, with NetworkManager 1.58.1 and wpa_supplicant 2.12; other chipsets or versions are untested. The runtime patch is forgotten whenever the profile is reloaded and must be re-applied per bring-up. The chosen regulatory country code must be lawful in the country of use; this record documents what works on one machine, not an endorsement. No live re-run of the bring-up was performed on the reporting date.",
+    "observation_date": "2026-10-01",
+    "provenance": "Firsthand observation on the affected machine; the wrapper script was re-read and matched against this procedure when writing the record.",
+    "result": "success",
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "NetworkManager does not expose a 160 MHz channel-width request for access-point mode; the width actually lives in wpa_supplicant network properties (max_oper_chwidth and vht_center_freq1 together with the base frequency). Rewriting those properties on the live network object and re-selecting the same network makes the driver program the wider channel, as long as the global regulatory tables permit 160 MHz at 5150-5350 MHz for the country in use."
+    },
+    "test_method": "Verified at setup time on this machine and exercised repeatedly since by the bring-up wrapper for the 160 MHz hotspot: after the SelectNetwork call, iw dev reports width 160 MHz within about 2 s; the deliberate fallback test (skipping the patch) yields a working channel 36 / 80 MHz access point. Reported here after re-reading the current wrapper script against live versions without re-running the bring-up, because the hotspot was already serving in dual mode at audit time."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "report"
+}

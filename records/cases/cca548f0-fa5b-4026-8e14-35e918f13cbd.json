@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-10-02T00:07:20Z",
+  "id": "cca548f0-fa5b-4026-8e14-35e918f13cbd",
+  "payload": {
+    "domains": [
+      "wifi",
+      "network",
+      "hotspot"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "A 160 MHz access point on UNII-1/UNII-2 (channel 36 base, center 5250) for high-throughput tablet and game-streaming clients; NetworkManager access-point profiles only ever come up at 80 MHz width."
+    },
+    "intent": "optional",
+    "observed": "With NetworkManager 1.58.1 and a MediaTek MT7922 (driver mt7921e), a dedicated AP profile on channel 36 reports width 80 MHz in iw dev info and there is no profile setting to request 160 MHz in AP mode. The default regulatory country also caps 5170-5250 MHz at 80 MHz (iw reg get shows the range at @ 80). Sequence that works: set the global regulatory country to one whose tables allow 160 MHz at 5150-5350 MHz (this machine uses ID) with sudo iw reg set before the bring-up, raise the AP normally (36/80 base), then rewrite the CURRENT wpa_supplicant network Properties over D-Bus (frequency 5180, ht40 1, max_oper_chwidth 2, vht_center_freq1 5250) via busctl --system set-property on fi.w1.wpa_supplicant1, call Disconnect on the interface object, wait about 0.5 s, and call SelectNetwork with the same network object. iw dev then reports width 160 MHz within roughly 2 s. If any step fails, a profile down/up leaves a fully working 36/80 AP as fallback, and restoring the regdom returns everything to base.",
+    "title": "NetworkManager cannot run a 160 MHz 5 GHz access point; a runtime wpa_supplicant D-Bus patch makes it work"
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "case"
+}
