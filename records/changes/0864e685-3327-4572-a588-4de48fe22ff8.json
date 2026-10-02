@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-10-02T00:07:20Z",
+  "id": "0864e685-3327-4572-a588-4de48fe22ff8",
+  "payload": {
+    "activation": {
+      "details": "Wrapper script re-applies the patch per hotspot bring-up; no reboot or service restart needed.",
+      "required": "manual"
+    },
+    "affected_files": [],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "kind": "hardware",
+            "product": "MT7922",
+            "role": "network",
+            "vendor": "MediaTek"
+          }
+        }
+      ],
+      "uncertain_conditions": [
+        {
+          "constraints": [
+            {
+              "op": "!=",
+              "version": "2.12"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "wpa_supplicant"
+          }
+        },
+        {
+          "constraints": [
+            {
+              "op": "!=",
+              "version": "1.58.1"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "networkmanager"
+          }
+        }
+      ]
+    },
+    "case_id": "cca548f0-fa5b-4026-8e14-35e918f13cbd",
+    "effects": "The AP serves 160 MHz on channels 36 and wider, giving HE160-capable clients their maximum link width; already-connected clients experience a short AP flap (about 0.5-2 s) during the Disconnect/SelectNetwork cycle; the width is runtime-only and must be re-applied on every bring-up.",
+    "explanation": "A wrapper script runs the whole sequence per bring-up: regdom country change with a verified retry loop, nmcli device set managed yes, nmcli connection up of the 36/80 base profile, then the wpa_supplicant D-Bus patch (GetInterface s <iface> on the object root, CurrentNetwork read for the network path, set-property of the four fields, Disconnect, SelectNetwork) and an iw dev width poll. Nothing persistent is changed: the NetworkManager profile itself stays at base 80 MHz, the width lives only in wpa_supplicant runtime state, and the procedure must be re-run every time the hotspot is raised. A companion off-script restores the original regulatory country. Regulatory responsibility: the chosen country code must be lawful in the country of use.",
+    "intent": "optional",
+    "method": "workaround",
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Set the global regulatory country to one allowing 160 MHz at 5150-5350 MHz (this machine uses ID: sudo iw reg set ID) and confirm the global line of iw reg get before raising the access point",
+        "Raise the base profile: sudo nmcli connection up <AP-160-profile> ifname <iface> (it comes up on channel 36 at 80 MHz)",
+        "Find the runtime objects: sudo busctl --system call fi.w1.wpa_supplicant1 /fi/w1/wpa_supplicant1 fi.w1.wpa_supplicant1 GetInterface s <iface> gives the interface path; sudo busctl --system get-property on that path with fi.w1.wpa_supplicant1.Interface CurrentNetwork gives the network object path",
+        "Patch the network: sudo busctl --system set-property fi.w1.wpa_supplicant1 <network-path> fi.w1.wpa_supplicant1.Network Properties a{sv} 4 frequency i 5180 ht40 i 1 max_oper_chwidth i 2 vht_center_freq1 i 5250",
+        "Re-associate: sudo busctl --system call on the interface path Disconnect, sleep 0.5, then SelectNetwork o <network-path>",
+        "Poll sudo iw dev <iface> info until it shows width: 160 MHz (about 2 s). If it never does, fall back with nmcli connection down/up for a working 36/80 AP, and restore the original regulatory country when the hotspot is turned off"
+      ]
+    },
+    "requires_root": "yes",
+    "risk": "low",
+    "rollback": "Nothing persistent to undo: restore the regulatory country (sudo iw reg set <original>) and cycle or leave the profile down; the base profile is unmodified.",
+    "validation_plan": "After the patch, iw dev <iface> info reports width: 160 MHz within a few seconds and HE160-capable clients connect to the hotspot; deliberately skipping the patch leaves the same AP functioning at 36/80 as the fallback path."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "change"
+}
