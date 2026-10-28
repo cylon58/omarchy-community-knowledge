@@ -1,0 +1,127 @@
+{
+  "created_at": "2026-10-28T13:30:00Z",
+  "id": "7616cbe0-80bf-41a8-bfb5-321ee6041439",
+  "payload": {
+    "activation": {
+      "details": "The widget is enabled at the start of the bar's right section.",
+      "state": "active"
+    },
+    "actual_result": "CPU name (12th Gen i7-1265U after btop's name trimming), load average, memory total/used/available/cached/free, disk list and order (root, swap, home, pkg, log, boot), network interface and IP, and the 'cpu lazy' process order matched btop. Per-core temperatures followed btop's core-to-sensor map. With the pull-down closed the helper used about 0.05% CPU (1 tick in 20 s); with it open about 0.3%, 16 MB resident. Open btop brought up btop floating at 875x600.",
+    "adverse_effects": "None observed.",
+    "baseline": "not-tested",
+    "case_id": "54a36c2c-bf39-4a2b-80a9-a2e5bb2b0aa7",
+    "change_id": "aa0ce252-c677-4810-aaef-70c2f1d6c430",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "omarchy",
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          },
+          "version": "4.0.6",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "component": "compositor",
+            "kind": "software",
+            "name": "hyprland"
+          },
+          "version": "0.56.2",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "quickshell",
+          "selector": {
+            "component": "shell",
+            "kind": "software",
+            "name": "quickshell"
+          },
+          "version": "0.3.2.r7.g2b4501a-1",
+          "version_scheme": "arch"
+        },
+        {
+          "alias": "btop",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "btop"
+          },
+          "version": "1.4.7-1",
+          "version_scheme": "arch"
+        },
+        {
+          "alias": "powerbar",
+          "selector": {
+            "component": "plugin",
+            "kind": "software",
+            "name": "p0werj0int.powerbar"
+          },
+          "version": "0.9.6",
+          "version_scheme": "semver"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "omarchy",
+            "relation": "contains",
+            "to": "hyprland"
+          },
+          {
+            "detail": "exact",
+            "from": "hyprland",
+            "relation": "runs_on",
+            "to": "workstation"
+          },
+          {
+            "detail": "exact",
+            "from": "quickshell",
+            "relation": "runs_on",
+            "to": "hyprland"
+          },
+          {
+            "detail": "exact",
+            "from": "powerbar",
+            "relation": "runs_on",
+            "to": "quickshell"
+          }
+        ],
+        "nodes": [
+          "workstation",
+          "omarchy",
+          "hyprland",
+          "quickshell",
+          "btop",
+          "powerbar"
+        ]
+      }
+    },
+    "expected_result": "The helper's figures match btop's for the same moment, and the widget costs little when idle.",
+    "limitations": "One machine (Intel laptop, coretemp sensors, btrfs subvolumes, Wi-Fi). CPU percentages were compared only roughly because the two samplers do not tick at the same instant. GPU and battery stats were not ported. Two deliberate differences: disk read/write is shown per second while btop prints bytes per update interval (btop_draw.cpp), and subvolumes of one device are folded into one row. Other btop versions may compute differently.",
+    "observation_date": "2026-10-28",
+    "provenance": "Firsthand: built and checked on the contributor's own laptop by an AI coding assistant (Claude Code) working at the contributor's request; the assistant inspected the screenshots and logs itself.",
+    "result": "success",
+    "root_cause": {
+      "assessment": "unknown",
+      "rationale": "This is an optional feature, not a defect; there is no cause to diagnose."
+    },
+    "test_method": "Ran btop 1.4.7 in a detached 220x60 tmux pane while the helper sampled with detail on, captured the pane, and compared the two. Then enabled the widget in Powerbar, screenshotted the bar and pull-down, launched btop from the widget, and measured the helper's CPU ticks over 20 s with the pull-down closed."
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/aristocratos/btop/blob/v1.4.7/src/linux/btop_collect.cpp",
+      "https://github.com/aristocratos/btop/blob/v1.4.7/src/btop_draw.cpp"
+    ]
+  },
+  "schema_version": 1,
+  "type": "report"
+}

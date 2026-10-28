@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-10-28T13:30:00Z",
+  "id": "54a36c2c-bf39-4a2b-80a9-a2e5bb2b0aa7",
+  "payload": {
+    "domains": [
+      "shell-plugin",
+      "bar",
+      "monitoring"
+    ],
+    "expectation": {
+      "basis": "user-requested",
+      "text": "A bar system monitor (CPU load and temperature, RAM, network up/down, with a pull-down of more detail and a button that opens btop) should report the same numbers btop shows."
+    },
+    "intent": "optional",
+    "observed": "btop 1.4.7 has no export, JSON or headless mode (btop --help lists only display options), so a bar widget cannot ask btop for its numbers. Of the options offered (port btop's collector, read a hidden btop's screen, or build a patched btop that exports), the user chose porting the collector; screen-reading would break when btop's layout changes and a patched btop would need rebuilding on every update.",
+    "title": "Show btop's own CPU, temperature, RAM and network numbers in the Omarchy bar"
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/aristocratos/btop/blob/v1.4.7/src/linux/btop_collect.cpp",
+      "https://github.com/aristocratos/btop/blob/v1.4.7/src/btop_draw.cpp"
+    ]
+  },
+  "schema_version": 1,
+  "type": "case"
+}

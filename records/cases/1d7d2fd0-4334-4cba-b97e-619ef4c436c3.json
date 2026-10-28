@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-10-28T13:30:00Z",
+  "id": "1d7d2fd0-4334-4cba-b97e-619ef4c436c3",
+  "payload": {
+    "domains": [
+      "shell-plugin",
+      "bar"
+    ],
+    "expectation": {
+      "basis": "compatibility",
+      "text": "A third-party bar widget that reports its full width through implicitWidth should get a Powerbar slot wide enough to show its whole readout."
+    },
+    "intent": "corrective",
+    "observed": "On Powerbar 0.9.6 a new third-party bar widget built as one qs.Ui WidgetButton (its own label hidden, a Row of Text readings inside, fixedWidth set from the Row) showed only about its first 160 logical px: 'CPU 7% 69°C RAM 8.4/' of a readout roughly 330 px long. It stayed clipped after the readings settled and after a shell restart. Powerbar sizes each slot from the painted width it measures, and CellModel.js caps 'free text' at MAX_INK = 160 px unless the slot has two or more click targets (Bar.qml passes the cap flag as !root.vertical && compoundTargets.length < 2). The stock omarchy.bar was not tested.",
+    "title": "Powerbar clips a wide one-button text bar widget at 160 px"
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/overp0werj0int/powerbar/blob/52c547af7588c2910ab0a18b0ad734228bcb1a3e/CellModel.js",
+      "https://github.com/overp0werj0int/powerbar/blob/52c547af7588c2910ab0a18b0ad734228bcb1a3e/Bar.qml"
+    ]
+  },
+  "schema_version": 1,
+  "type": "case"
+}

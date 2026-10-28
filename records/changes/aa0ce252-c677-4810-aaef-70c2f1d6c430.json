@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-10-28T13:30:00Z",
+  "id": "aa0ce252-c677-4810-aaef-70c2f1d6c430",
+  "payload": {
+    "activation": {
+      "details": "Enable the widget, then restart the Omarchy shell so Powerbar loads it.",
+      "required": "service-restart"
+    },
+    "affected_files": [
+      "{user_config}/omarchy/plugins/PLUGIN_ID/"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "btop"
+          }
+        },
+        {
+          "constraints": [
+            {
+              "op": ">=",
+              "version": "4.0.6"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          }
+        }
+      ],
+      "uncertain_conditions": [
+        {
+          "constraints": [
+            {
+              "op": "!=",
+              "version": "1.4.7-1"
+            }
+          ],
+          "kind": "software",
+          "scheme": "arch",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "btop"
+          }
+        }
+      ]
+    },
+    "case_id": "54a36c2c-bf39-4a2b-80a9-a2e5bb2b0aa7",
+    "effects": "Adds one Python process (about 16 MB) that reads /proc and /sys every update interval, plus a bar widget and pull-down. It does not change btop or its configuration.",
+    "explanation": "A small helper process re-implements btop 1.4.7's Linux collector (src/linux/btop_collect.cpp) against the same /proc and /sys files and reads ~/.config/btop/btop.conf for update_ms, cpu_sensor, temp_scale, freq_mode, net_iface, base_10_sizes, the disk list and proc_sorting, and the current btop theme for colours. It prints one JSON line per update interval to a Quickshell Process in the bar widget, and adds per-core, disk and process detail only while the pull-down is open. The pull-down's Open btop button runs omarchy-launch-or-focus-tui btop, which Omarchy already floats at 875x600. The plugin is local and not published.",
+    "intent": "optional",
+    "method": "plugin",
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Port the parts of btop's Linux collector you need: /proc/stat totals and idles (first 8 fields, idle plus iowait), the Package id / Tdie sensor pick and core-to-sensor map, /proc/meminfo (used = total minus available), fstab-listed disks, the interface with the most lifetime bytes that is running, and btop's floating_humanizer for units.",
+        "Read ~/.config/btop/btop.conf and btop's current theme file each sample and re-scan sensors when the config changes, so the widget follows btop's settings.",
+        "Run the helper from the widget as a long-lived Quickshell Process that writes one JSON line per btop update_ms and exits when its stdin closes, and send detail on/off over stdin so per-process scanning runs only while the pull-down is open.",
+        "In the pull-down, bind Repeaters to plain counts (number of cores, disks, processes) so each sample rebinds rows instead of rebuilding them.",
+        "Compare against a real btop started in a detached tmux pane (tmux new-session -d -x 220 -y 60 btop, then tmux capture-pane -p)."
+      ]
+    },
+    "requires_root": "no",
+    "risk": "low",
+    "rollback": "Disable and remove the widget; its helper exits when the widget's pipe closes.",
+    "validation_plan": "Run btop in a detached tmux pane alongside the helper and compare CPU name, load average, memory rows, disk list and order, network interface and IP, and process order; check the helper's CPU use with ps."
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/aristocratos/btop/blob/v1.4.7/src/linux/btop_collect.cpp",
+      "https://github.com/aristocratos/btop/blob/v1.4.7/src/btop_draw.cpp"
+    ]
+  },
+  "schema_version": 1,
+  "type": "change"
+}

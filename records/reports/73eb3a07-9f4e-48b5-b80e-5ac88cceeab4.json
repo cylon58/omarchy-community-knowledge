@@ -1,0 +1,127 @@
+{
+  "created_at": "2026-10-28T13:30:00Z",
+  "id": "73eb3a07-9f4e-48b5-b80e-5ac88cceeab4",
+  "payload": {
+    "activation": {
+      "details": "The three-button widget is enabled at the start of the bar's right section.",
+      "state": "active"
+    },
+    "actual_result": "Before the change the slot stayed about 160 px wide and cut the readout after 'RAM 8.4/' in both screenshots. With three click targets the full readout was visible after the restart, the widget's pull-down opened when called over IPC, and the shell log showed no warnings from the widget.",
+    "adverse_effects": "None observed.",
+    "baseline": "reproduced",
+    "case_id": "1d7d2fd0-4334-4cba-b97e-619ef4c436c3",
+    "change_id": "b2b4feec-bea0-4be7-82e8-18dfd3269f09",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "omarchy",
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          },
+          "version": "4.0.6",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "component": "compositor",
+            "kind": "software",
+            "name": "hyprland"
+          },
+          "version": "0.56.2",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "quickshell",
+          "selector": {
+            "component": "shell",
+            "kind": "software",
+            "name": "quickshell"
+          },
+          "version": "0.3.2.r7.g2b4501a-1",
+          "version_scheme": "arch"
+        },
+        {
+          "alias": "powerbar",
+          "selector": {
+            "component": "plugin",
+            "kind": "software",
+            "name": "p0werj0int.powerbar"
+          },
+          "version": "0.9.6",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "qt-declarative",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "qt6-declarative"
+          },
+          "version": "6.12.0-2",
+          "version_scheme": "arch"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "omarchy",
+            "relation": "contains",
+            "to": "hyprland"
+          },
+          {
+            "detail": "exact",
+            "from": "hyprland",
+            "relation": "runs_on",
+            "to": "workstation"
+          },
+          {
+            "detail": "exact",
+            "from": "quickshell",
+            "relation": "runs_on",
+            "to": "hyprland"
+          },
+          {
+            "detail": "exact",
+            "from": "powerbar",
+            "relation": "runs_on",
+            "to": "quickshell"
+          }
+        ],
+        "nodes": [
+          "workstation",
+          "omarchy",
+          "hyprland",
+          "quickshell",
+          "powerbar",
+          "qt-declarative"
+        ]
+      }
+    },
+    "expected_result": "The whole readout, about 330 logical px ('CPU 5% 62°C RAM 8.3/15.2G NET ↓687B/s ↑644B/s'), is visible in the bar.",
+    "limitations": "One laptop, one widget, Powerbar 0.9.6 only, horizontal top bar only. The stock omarchy.bar was not tested, so whether it has a similar limit is unknown. The 160 px value and the two-target rule come from reading Powerbar's source at commit 52c547a, not from its documentation. Mouse clicks on each group and a vertical bar were not tested.",
+    "observation_date": "2026-10-28",
+    "provenance": "Firsthand: built and checked on the contributor's own laptop by an AI coding assistant (Claude Code) working at the contributor's request; the assistant inspected the screenshots and logs itself.",
+    "result": "success",
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "In Powerbar 0.9.6, CellModel.place and cellLength limit a slot's shown width to MAX_INK = 160 px when the cap flag is set, and Bar.qml sets that flag for any horizontal slot with fewer than two click targets. Giving the widget three click targets removed the cap and the full readout appeared."
+    },
+    "test_method": "Built a local system-monitor bar widget (CPU load and temperature, RAM, network up/down) as one WidgetButton holding a Row of labels and readings, put it first in Powerbar's right section on a top bar, restarted the shell and took two grim screenshots a few seconds apart. Then read Powerbar's ModuleSlot sizing in Bar.qml and CellModel.js, split the widget into three WidgetButtons (CPU, RAM, NET), restarted the shell and took screenshots again."
+  },
+  "provenance": {
+    "kind": "firsthand",
+    "sources": [
+      "https://github.com/overp0werj0int/powerbar/blob/52c547af7588c2910ab0a18b0ad734228bcb1a3e/CellModel.js",
+      "https://github.com/overp0werj0int/powerbar/blob/52c547af7588c2910ab0a18b0ad734228bcb1a3e/Bar.qml"
+    ]
+  },
+  "schema_version": 1,
+  "type": "report"
+}
