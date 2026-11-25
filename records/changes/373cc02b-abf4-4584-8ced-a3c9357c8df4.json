@@ -1,0 +1,92 @@
+{
+  "created_at": "2026-11-25T12:00:00Z",
+  "id": "373cc02b-abf4-4584-8ced-a3c9357c8df4",
+  "payload": {
+    "activation": {
+      "details": "Edits to an already loaded service plugin took effect only after 'omarchy restart shell'. The gesture entries apply on 'hyprctl reload'.",
+      "required": "service-restart"
+    },
+    "affected_files": [
+      "{home}/.config/omarchy/plugins/",
+      "{home}/.config/hypr/input.lua"
+    ],
+    "applicability": {
+      "requires": [
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "component": "shell",
+            "kind": "software"
+          }
+        },
+        {
+          "kind": "component",
+          "presence": true,
+          "selector": {
+            "kind": "hardware",
+            "product": "multi-touch trackpad",
+            "role": "other"
+          }
+        }
+      ],
+      "uncertain_conditions": [
+        {
+          "constraints": [
+            {
+              "op": "!=",
+              "version": "0.56.2"
+            }
+          ],
+          "kind": "software",
+          "scheme": "semver",
+          "selector": {
+            "component": "compositor",
+            "kind": "software"
+          }
+        },
+        {
+          "constraints": [
+            {
+              "op": "!=",
+              "version": "0.3.2"
+            }
+          ],
+          "kind": "software",
+          "scheme": "upstream",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "quickshell"
+          }
+        }
+      ]
+    },
+    "case_id": "dc8d5e53-5b11-4012-95c4-b242bc31b55f",
+    "effects": "Three fingers up shows every window of the current workspace side by side with no overlap, including windows hidden behind others, plus a strip of workspaces at the top. Window contents are captured once each time the overview opens. Nothing runs while it is closed.",
+    "explanation": "Second version of the overview plugin, replacing the first layout. The first version drew each workspace as a tile with its windows at their real positions, so a window covered by another stayed hidden in the overview too. This version is about windows: the main area shows every window of the workspace that is active on the focused monitor, spread out so that none overlaps another, each keeping its aspect ratio and its size relative to the others. A strip at the top shows one small tile per non-empty workspace with the current one marked. The overlay reads the window and monitor lists from 'hyprctl clients -j' and 'hyprctl monitors -j' once per open. Windows are sorted in reading order and packed into centred rows at one uniform scale, found by bisection as the largest scale that fits and capped at 1 so a lone window is never enlarged; this layout is a small pure JavaScript library beside the QML. Thumbnails are still Quickshell.Wayland ScreencopyView items fed by each window's Wayland toplevel, left live only until the first frame arrives. The preview covers its container's border, so the frame is drawn again on top of it, and the backdrop is fully opaque: at 95 percent opacity a terminal's preview could not be told apart from the real terminal showing through. The IPC functions and the gestures are unchanged. The plugin is not published; this record describes the approach, not a downloadable artifact.",
+    "intent": "optional",
+    "method": "plugin",
+    "procedure": {
+      "kind": "instructions",
+      "steps": [
+        "Start from a service-type user plugin with a full-screen overlay and open, close and toggle IPC functions, as in the earlier change for this case.",
+        "On open, read 'hyprctl clients -j' and 'hyprctl monitors -j' once. Keep the mapped windows whose workspace is the active one on the focused monitor, including floating and fully covered windows.",
+        "Sort the windows in reading order and pack them into rows at one uniform scale so none overlap: search for the largest scale at which all rows fit the area, cap it at 1, and centre each row. Keep this in a pure JavaScript file so it can be checked outside the shell.",
+        "Draw each window as a ScreencopyView of its Wayland toplevel that stays live only until the first frame, with the app icon and title as a fallback and as a plain-text label beneath. Draw the frame on top of the preview.",
+        "Add a top strip with one small tile per non-empty workspace and mark the current one. A click on a tile switches to that workspace and closes the overview.",
+        "A click on a window focuses it, raises it if it is floating, and closes the overview. Arrow keys move the selection to the nearest window in that direction, Enter activates it, Escape or a click on the backdrop closes.",
+        "Use a fully opaque backdrop."
+      ]
+    },
+    "requires_root": "no",
+    "risk": "low",
+    "rollback": "Run 'omarchy plugin disable' for the plugin and delete its folder, remove the two three-finger gesture entries from ~/.config/hypr/input.lua, then run 'hyprctl reload'.",
+    "validation_plan": "Put a floating window on top of another, open the overview and check that both appear separately with their own pictures; click one and check it comes to the front; move the selection with the arrow keys and press Enter; click a workspace tile in the strip. Check the shell log for QML errors."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "change"
+}

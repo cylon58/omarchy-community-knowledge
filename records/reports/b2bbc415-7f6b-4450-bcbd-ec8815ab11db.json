@@ -1,0 +1,120 @@
+{
+  "created_at": "2026-11-25T12:00:00Z",
+  "id": "b2bbc415-7f6b-4450-bcbd-ec8815ab11db",
+  "payload": {
+    "activation": {
+      "details": "Plugin enabled in its second version; the gesture entries were not changed.",
+      "state": "active"
+    },
+    "actual_result": "In both screenshots the two windows of the active workspace appeared side by side with no overlap, each with a real captured preview, a visible frame, an icon and a title. The strip showed one workspace in the first screenshot and two in the second, with the current one marked. With the opaque backdrop nothing behind the overlay showed through. The shell log had no QML errors from the plugin. The user reported having tried the click and the arrow keys and that everything works.",
+    "adverse_effects": "None observed. Applying edits to the plugin needed a restart of the Omarchy shell each time.",
+    "baseline": "reproduced",
+    "case_id": "dc8d5e53-5b11-4012-95c4-b242bc31b55f",
+    "change_id": "373cc02b-abf4-4584-8ced-a3c9357c8df4",
+    "environment": {
+      "architecture": "x86_64",
+      "channel": "stable",
+      "components": [
+        {
+          "alias": "host",
+          "selector": {
+            "kind": "hardware",
+            "model": "MacBookPro9,2",
+            "role": "host",
+            "vendor": "Apple"
+          }
+        },
+        {
+          "alias": "trackpad",
+          "selector": {
+            "kind": "hardware",
+            "product": "internal multi-touch trackpad",
+            "role": "other",
+            "vendor": "Apple"
+          }
+        },
+        {
+          "alias": "omarchy",
+          "selector": {
+            "component": "omarchy",
+            "kind": "software"
+          },
+          "version": "4.5.0-3",
+          "version_scheme": "arch"
+        },
+        {
+          "alias": "hyprland",
+          "selector": {
+            "component": "compositor",
+            "kind": "software"
+          },
+          "version": "0.56.2",
+          "version_scheme": "semver"
+        },
+        {
+          "alias": "quickshell",
+          "selector": {
+            "component": "package",
+            "kind": "software",
+            "name": "quickshell"
+          },
+          "version": "0.3.2.r7.g2b4501a-1",
+          "version_scheme": "arch"
+        }
+      ],
+      "origin": "firsthand",
+      "runtime_mode": "native",
+      "topology": {
+        "edges": [
+          {
+            "detail": "exact",
+            "from": "trackpad",
+            "relation": "connected_to",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "trackpad",
+            "relation": "delivers_input_to",
+            "to": "hyprland"
+          },
+          {
+            "detail": "exact",
+            "from": "hyprland",
+            "relation": "runs_on",
+            "to": "host"
+          },
+          {
+            "detail": "exact",
+            "from": "quickshell",
+            "relation": "runs_on",
+            "to": "host"
+          }
+        ],
+        "nodes": [
+          "host",
+          "trackpad",
+          "omarchy",
+          "hyprland",
+          "quickshell"
+        ]
+      }
+    },
+    "expected_result": "Every window of the current workspace visible and separate, including one hidden behind another, with a click or the arrow keys taking the user to a window.",
+    "limitations": "One machine and one session, on a monitor rotated to portrait; the landscape laptop panel was checked only through the layout function's own checks, not on screen. At most two windows were on the workspace when it was looked at; many windows were exercised only in the layout checks. The user's report named the click and the arrow keys; clicking a workspace tile, Enter and Escape were not reported separately. Labels in one row can sit at different heights because each sits under its own window. Processor cost while opening was not measured.",
+    "observation_date": "2026-11-25",
+    "provenance": "Firsthand: built and checked on the reporting user's machine by an AI coding agent, which ran the command and screenshot checks; the click and arrow key results are the user's own report.",
+    "repetitions": 2,
+    "result": "success",
+    "root_cause": {
+      "assessment": "supported",
+      "rationale": "The first version hid covered windows because it drew windows at their real positions inside a workspace tile; laying the windows out without overlap removed the problem in the same situation."
+    },
+    "test_method": "The overview was opened by command with a floating terminal mostly covering another floating window, and again on a workspace with two terminals; full-screen screenshots were taken and inspected each time, and the shell log was read. The user then tried it on the physical machine and reported the outcome in conversation."
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "report"
+}

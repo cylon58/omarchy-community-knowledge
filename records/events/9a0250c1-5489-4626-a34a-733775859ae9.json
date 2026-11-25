@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-11-25T12:00:00Z",
+  "id": "9a0250c1-5489-4626-a34a-733775859ae9",
+  "payload": {
+    "event_kind": "supersession",
+    "reason": "The first overview layout drew windows at their real positions inside workspace tiles, so a window covered by another stayed hidden. The author replaced it with a layout that spreads the windows of the current workspace without overlap and keeps the workspaces as a strip at the top. The first layout worked as described and is not withdrawn; it is simply no longer what the author uses.",
+    "relation": {
+      "from": {
+        "id": "373cc02b-abf4-4584-8ced-a3c9357c8df4",
+        "type": "change"
+      },
+      "kind": "supersedes",
+      "to": {
+        "id": "d0d79825-bc59-441b-92d8-6195580e9ac8",
+        "type": "change"
+      }
+    },
+    "supporting_reports": [
+      "b2bbc415-7f6b-4450-bcbd-ec8815ab11db"
+    ],
+    "targets": [
+      {
+        "id": "d0d79825-bc59-441b-92d8-6195580e9ac8",
+        "type": "change"
+      },
+      {
+        "id": "373cc02b-abf4-4584-8ced-a3c9357c8df4",
+        "type": "change"
+      }
+    ]
+  },
+  "provenance": {
+    "kind": "firsthand"
+  },
+  "schema_version": 1,
+  "type": "event"
+}
